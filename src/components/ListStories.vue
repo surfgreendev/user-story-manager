@@ -49,7 +49,7 @@
                             <div class="card-footer">
                                 <div class="text-right">
                                     <i v-on:click="deleteStory(index)" class="icon icon-delete"></i>
-                                    <button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-default btn-sm"><i class="icon icon-arrow-down"></i> Show Acceptance Criterias</button>
+                                    <button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-default btn-sm"><i v-if="!story.show_ac" class="icon icon-arrow-up"></i> <i v-if="story.show_ac" class="icon icon-arrow-down"></i>Show Acceptance Criterias</button>
                                 </div>
                             </div>
                         </div>
