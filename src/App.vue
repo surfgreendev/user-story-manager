@@ -22,4 +22,13 @@ export default {
 
   margin-top: 60px;
 }
+
+.list-inline {
+  list-style: none; 
+}
+
+.list-inline li {
+  display: inline;
+  margin-right: 4px;
+}
 </style>

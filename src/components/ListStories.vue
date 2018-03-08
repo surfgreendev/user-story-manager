@@ -44,12 +44,14 @@
                             </div>
                             <div class="card-body">
                                 <p>As a {{story.who}} I'd like to {{story.what}}, so that {{story.why}}</p>
-                                <p v-if="!story.show_ac">{{story.acceptance_criteria}}</p>
+                                <p v-if="!story.show_ac"><vue-markdown>{{story.acceptance_criteria}}</vue-markdown></p>
                             </div>
                             <div class="card-footer">
                                 <div class="text-right">
-                                    <i v-on:click="deleteStory(index)" class="icon icon-delete"></i>
-                                    <button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-default btn-sm"><i v-if="!story.show_ac" class="icon icon-arrow-up"></i> <i v-if="story.show_ac" class="icon icon-arrow-down"></i>Show Acceptance Criterias</button>
+                                    <ul class="list-inline">
+                                        <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-default btn-sm"><i v-if="!story.show_ac" class="icon icon-arrow-up"></i> <i v-if="story.show_ac" class="icon icon-arrow-down"></i>Acceptance Criteria</button></li>
+                                        <li><i v-on:click="deleteStory(index)" class="icon icon-delete"></i></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -61,12 +63,13 @@
 </template>
 
 <script>
+import VueMarkdown from 'vue-markdown'
 
 
 export default {
   name: 'ListStories',
   components: {
-      
+      VueMarkdown
   },
   data() {
       return {
@@ -102,8 +105,8 @@ export default {
     toggleAcceptanceCriteria: function(story) {
         console.log("AC CLICKED")
         story.show_ac = !story.show_ac;
-
-    }
+    },
+    
   } 
 }
 </script>
