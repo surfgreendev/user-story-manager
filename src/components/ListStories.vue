@@ -50,6 +50,7 @@
                                 <div class="text-right">
                                     <ul class="list-inline">
                                         <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-default btn-sm"><i v-if="!story.show_ac" class="icon icon-arrow-up"></i> <i v-if="story.show_ac" class="icon icon-arrow-down"></i>Acceptance Criteria</button></li>
+                                        <li>  <router-link :to="{ name: 'UpdateStory', params: { storyId: index }}"><i class="icon icon-edit"></i></router-link></li>
                                         <li><i v-on:click="deleteStory(index)" class="icon icon-delete"></i></li>
                                     </ul>
                                 </div>

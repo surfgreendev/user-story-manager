@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <transition name="rout-trans" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
