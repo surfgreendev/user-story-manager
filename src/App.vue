@@ -13,6 +13,7 @@ export default {
 <style>
 
 @import url("https://unpkg.com/spectre.css/dist/spectre.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre-icons.min.css");
 
 #app {
   
