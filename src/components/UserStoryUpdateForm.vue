@@ -46,6 +46,8 @@ export default {
   methods: {
       updateStory: function() {
           console.log("UPDATE STORY", this.who, this.what, this.why)
+          //this.$router.go("/#")
+          this.$router.push('ListStories')
       }
   },
   created: {

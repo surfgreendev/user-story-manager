@@ -81,7 +81,7 @@ export default {
           stories: [
               {who: "Product Manager", what: "do sth", why: "So that ...", acceptance_criteria: "nope", show_ac: "false"},
               {who: "Consultsnt", what: "do sth", why: "So that ...", acceptance_criteria: "nope", show_ac: "false"}
-              ]
+            ]
       }
   },
   methods: {
