@@ -43,10 +43,11 @@ export default {
           console.log('signup', this.email, this.pw)
 
           firebase.auth().createUserWithEmailAndPassword(this.email, this.pw).then(
-              function(user) {
+              user => {
                   console.log("USER HAS BEEN CREATED", user)
+                  this.$router.replace('stories')
               },
-              function(err){
+              err => {
                   console.log("ERROR EMiTTED ON SIGNUP", err)
               }
           );

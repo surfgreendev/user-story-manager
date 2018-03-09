@@ -1,5 +1,6 @@
 <template>
     <div class="the-root">
+        <Header></Header>
         <div class="container add-story-container">
             <div class="container grid-lg">
                 <div class="columns">
@@ -65,12 +66,13 @@
 
 <script>
 import VueMarkdown from 'vue-markdown'
-
+import Header from './Header'
 
 export default {
   name: 'ListStories',
   components: {
-      VueMarkdown
+      VueMarkdown,
+      Header
   },
   data() {
       return {

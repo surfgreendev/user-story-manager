@@ -43,10 +43,11 @@ export default {
           console.log("SIGN IN", this.email, this.pw)
 
           firebase.auth().signInWithEmailAndPassword(this.email, this.pw).then(
-              function(user){
+              user => {
                   console.log("SIGNE IN USER:", user)
+                  this.$router.replace('stories')
               },
-              function(err){
+              err => {
                   console.log("ERROR SIGN IN", err)
               }
           );

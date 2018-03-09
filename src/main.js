@@ -9,24 +9,31 @@ import firebase from 'firebase'
 //import {config} from './fireb_conf'
 import config_data from './fireb_conf.json'
 
-
 Vue.use(VeeValidate)
 Vue.use(VueMarkDown)
 
 Vue.config.productionTip = false
 
-
-
-console.log("FIREB CONF", config_data)
-
+let app;
 firebase.initializeApp(config_data)
 
+firebase.auth().onAuthStateChanged(function(user){
+  if(!app){
+    /* eslint-disable no-new */
+    app = new Vue({
+      el: '#app',
+      router,
+      components: { App, VueMarkDown },
+      template: '<App/>'
+    });
+  }
+});
 
-
-/* eslint-disable no-new */
+/*
 new Vue({
   el: '#app',
   router,
   components: { App, VueMarkDown },
   template: '<App/>'
 });
+*/
