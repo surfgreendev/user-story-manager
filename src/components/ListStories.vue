@@ -52,7 +52,7 @@
                                     <ul class="list-inline">
                                         <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-default btn-sm"><i v-if="!story.show_ac" class="icon icon-arrow-up"></i> <i v-if="story.show_ac" class="icon icon-arrow-down"></i>Acceptance Criteria</button></li>
                                         <li>  <router-link :to="{ name: 'UpdateStory', params: { storyId: index }}"><i class="icon icon-edit"></i></router-link></li>
-                                        <li><i v-on:click="deleteStory(index)" class="icon icon-delete"></i></li>
+                                        <li><i v-on:click="removeStory(story)" class="icon icon-delete"></i></li>
                                     </ul>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@ export default {
       }
   },
   methods: {
-      addStory: function() {
+    addStory: function() {
           this.$validator.validateAll().then((result) => {
               if (result) {
                     var story = {who: this.who, what: this.what, why: this.why, acceptance_criteria: this.acceptance_criteria, show_ac: true}
@@ -112,10 +112,13 @@ export default {
                     console.log("NOT VALID")
               }
           });
-      },
-      deleteStory: function(i) {
+    },
+    deleteStory: function(i) {
         console.log("DELETE CLICKED")
         this.stories.splice(i, 1);
+    },
+    removeStory: function(story) {
+        storiesRef.child(story['.key']).remove()
     },
     toggleAcceptanceCriteria: function(story) {
         console.log("AC CLICKED")
