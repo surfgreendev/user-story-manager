@@ -38,7 +38,7 @@
             <div class="columns">
                 <div class="column col-12">
                     <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceInDown">
-                        <div class="card" v-for="(story, index) in stories" :key='index'> 
+                        <div class="card" v-for="(story, index) in dbstories" :key='index'> 
                             <div class="card-header">
                                 <div class="card-title h5">{{story.who}} - {{story.what}} - {{story.why}}</div>
                                 <div class="card-subtitle text-gray">User Story ID {{index}} {{story.show_ac}}</div>
@@ -102,7 +102,7 @@ export default {
                     var story = {who: this.who, what: this.what, why: this.why, acceptance_criteria: this.acceptance_criteria, show_ac: true}
                     this.stories.push(story)
                     console.log("DBSTORIES",storiesRef)
-                    storiesRef.push({story: story})
+                    storiesRef.push(story)
                     this.who = '';
                     this.what = '';
                     this.why = '';
