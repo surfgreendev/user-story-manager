@@ -68,11 +68,20 @@
 import VueMarkdown from 'vue-markdown'
 import Header from './Header'
 
+import {firebaseApp} from '../db'
+
+let db = firebaseApp.database()
+
+var storiesRef = db.ref('stories')
+
 export default {
   name: 'ListStories',
   components: {
       VueMarkdown,
       Header
+  },
+  firebase: {
+      dbstories: storiesRef.limitToLast(25)
   },
   data() {
       return {
@@ -92,10 +101,13 @@ export default {
               if (result) {
                     var story = {who: this.who, what: this.what, why: this.why, acceptance_criteria: this.acceptance_criteria, show_ac: true}
                     this.stories.push(story)
+                    console.log("DBSTORIES",storiesRef)
+                    storiesRef.push({story: story})
                     this.who = '';
                     this.what = '';
                     this.why = '';
                     this.acceptance_criteria = '';
+                    
               } else {
                     console.log("NOT VALID")
               }
