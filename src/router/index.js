@@ -15,7 +15,8 @@ export default new Router({
     {
       path: '/edit/:storyId',
       name: 'UpdateStory',
-      component: UpdateStory
+      component: UpdateStory,
+      props: true
     }
   ]
 })
