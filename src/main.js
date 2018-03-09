@@ -7,7 +7,6 @@ import VeeValidate from 'vee-validate'
 import VueMarkDown from 'vue-markdown'
 import firebase from 'firebase'
 import VueFire from 'vuefire'
-
 import {firebaseApp} from './db'
 
 Vue.use(VeeValidate)

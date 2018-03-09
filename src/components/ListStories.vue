@@ -67,7 +67,7 @@
 <script>
 import VueMarkdown from 'vue-markdown'
 import Header from './Header'
-
+import firebase from 'firebase'
 import {firebaseApp} from '../db'
 
 let db = firebaseApp.database()
@@ -99,9 +99,19 @@ export default {
     addStory: function() {
           this.$validator.validateAll().then((result) => {
               if (result) {
-                    var story = {who: this.who, what: this.what, why: this.why, acceptance_criteria: this.acceptance_criteria, show_ac: true}
+                    var the_date = new Date()
+                    var story = {
+                            who: this.who, 
+                            what: this.what, 
+                            why: this.why, 
+                            acceptance_criteria: this.acceptance_criteria, 
+                            show_ac: true,
+                            created_on: the_date
+                            }
                     this.stories.push(story)
-                    console.log("DBSTORIES",storiesRef)
+                    
+                    console.log(firebase.auth().currentUser)
+
                     storiesRef.push(story)
                     this.who = '';
                     this.what = '';

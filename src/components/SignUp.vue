@@ -13,6 +13,10 @@
 
                             <form @submit.prevent="signUp">
                                 <div class="form-group">
+                                    <label class="form-label label-lg" for="display_name">Name:</label>
+                                    <input class="form-input input-lg" name="displayname" type="text" id="display_name" v-model="displayname" v-validate="'required|min:4'" placeholder="Your Name" :class="{'input': true, 'is-error': errors.has('displayname')}">
+                                    <p v-show="errors.has('displayname')" class="form-input-hint">{{ errors.first('displayname') }}</p>
+
                                     <label class="form-label label-lg" for="signup_email">E-Mail:</label>
                                     <input class="form-input input-lg" name="email" type="text" id="signup_email" v-model="email" v-validate="'required|email'" placeholder="E-Mail" :class="{'input': true, 'is-error': errors.has('email')}">
                                     <p v-show="errors.has('email')" class="form-input-hint">{{ errors.first('email') }}</p>
@@ -42,6 +46,7 @@ export default {
   name: 'SignUp',
   data () {
       return {
+          displayname: '',
           email: '',
           pw: '',
           fbError: false,
@@ -58,12 +63,14 @@ export default {
                   console.log('There are errors')
               }
           });
-          console.log('signup', this.email, this.pw)
+          console.log('signup', this.displayname, this.name, this.email, this.pw)
 
           firebase.auth().createUserWithEmailAndPassword(this.email, this.pw).then(
               user => {
                   console.log("USER HAS BEEN CREATED", user)
+                  user.updateProfile({displayName: this.displayname})
                   this.$router.replace('stories')
+                  
               },
               err => {
                   console.log("ERROR EMiTTED ON SIGNUP", err)
