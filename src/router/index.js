@@ -10,15 +10,29 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '*',
+      redirect: '/login'
+    },
+    {
+      path: '/',
+      redirect: '/login'
+    },
+    {
       path: '/stories',
       name: 'ListStories',
-      component: ListStories
+      component: ListStories,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/edit/:storyId',
       name: 'UpdateStory',
       component: UpdateStory,
-      props: true
+      props: true,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/signup',
