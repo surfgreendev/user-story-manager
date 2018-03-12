@@ -100,78 +100,39 @@ export default {
     addStory: function() {
           this.$validator.validateAll().then((result) => {
               if (result) {
-                    var the_date =  Date.now()
-                    var the_user = firebase.auth().currentUser.uid;
-                    var _uid = firebase.auth().currentUser.uid;
+                    let the_date =  Date.now()
+                    let _uid = firebase.auth().currentUser.uid;
 
-                    console.log("THE USER",_uid)
-                    var newStoryRef = storiesRef.push()
-                    console.log("New Story Ref", newStoryRef)
-
-                    var story = {
-                            userId: the_user,
+                    // create the story object 
+                    let story = {
+                            userId: _uid,
                             who: this.who, 
                             what: this.what, 
                             why: this.why, 
                             acceptance_criteria: this.acceptance_criteria, 
                             show_ac: true,
                             created_on: the_date
-                        }
-                    var uid_child = storiesUserOwnedRef.child(_uid)
-                    var uid_child_new_story_child = uid_child.child(newStoryRef.key)
-                    uid_child_new_story_child.set(story)
-                    /*
-                    var parent = {
-                        [_uid]: {}
                     }
 
-                    storiesUserOwnedRef.push(parent)
+                    // Get a <storyuid>
+                    let newStoryRef = storiesRef.push()
 
-                    storiesUserOwnedRef.child(_uid).push(
-                        {
-                            [newStoryRef.key]: {
-                                story
-                            }
-                        }
-                    )
-                    */
-                    //.child([_uid])
-                    /*
-                    var newUserOwnedStory = {
-                        [_uid]: {
-                            [newStoryRef.key]:{
-                                userId: the_user,
-                                who: this.who, 
-                                what: this.what, 
-                                why: this.why, 
-                                acceptance_criteria: this.acceptance_criteria, 
-                                show_ac: true,
-                                created_on: the_date
-                            }
-                        }
-                    }
-                    */
-
-                    //storiesUserOwnedRef.child(_uid).push(newUserOwnedStory)
-
-
-                    
-
-
-                    
-                    
-                    
-                    //this.stories.push(story)
+                    // Store stories to root/stories
                     newStoryRef.set(story)
+
+                    // Set up the structure of root/storiesUserOwned/<uid>/<storyuid>/
+                    let uid_child = storiesUserOwnedRef.child(_uid)
+                    let uid_child_new_story_child = uid_child.child(newStoryRef.key)
+                    uid_child_new_story_child.set(story)
                     
-                    //storiesRef.push(story)
+                    // Clean up the forms
                     this.who = '';
                     this.what = '';
                     this.why = '';
                     this.acceptance_criteria = '';
                     
               } else {
-                    console.log("NOT VALID")
+                    console.log("NOT VALID") //@todo: Emit error message in UI from form validation in create form
               }
           });
     },
