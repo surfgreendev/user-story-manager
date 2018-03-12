@@ -42,6 +42,12 @@
 <script>
 import firebase from 'firebase';
 
+import {firebaseApp} from '../db'
+
+let db = firebaseApp.database()
+
+var usersRef = db.ref('users')
+
 export default {
   name: 'SignUp',
   data () {
@@ -52,6 +58,9 @@ export default {
           fbError: false,
           fbErrorMsg: ''
       }
+  },
+  firebase: {
+      users: usersRef
   },
   methods: {
       signUp: function (){
@@ -69,6 +78,11 @@ export default {
               user => {
                   console.log("USER HAS BEEN CREATED", user)
                   user.updateProfile({displayName: this.displayname})
+                  usersRef.push({
+                      userId: user.uid,
+                      name: user.providerData[0].displayName,
+                      email: user.providerData[0].email,
+                  })
                   this.$router.replace('stories')
                   
               },

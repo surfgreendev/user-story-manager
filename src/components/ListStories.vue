@@ -73,6 +73,7 @@ import {firebaseApp} from '../db'
 let db = firebaseApp.database()
 
 var storiesRef = db.ref('stories')
+var storiesUserOwnedRef = db.ref('storiesUserOwned')
 
 export default {
   name: 'ListStories',
@@ -99,20 +100,71 @@ export default {
     addStory: function() {
           this.$validator.validateAll().then((result) => {
               if (result) {
-                    var the_date = new Date()
+                    var the_date =  Date.now()
+                    var the_user = firebase.auth().currentUser.uid;
+                    var _uid = firebase.auth().currentUser.uid;
+
+                    console.log("THE USER",_uid)
+                    var newStoryRef = storiesRef.push()
+                    console.log("New Story Ref", newStoryRef)
+
                     var story = {
+                            userId: the_user,
                             who: this.who, 
                             what: this.what, 
                             why: this.why, 
                             acceptance_criteria: this.acceptance_criteria, 
                             show_ac: true,
                             created_on: the_date
-                            }
-                    this.stories.push(story)
-                    
-                    console.log(firebase.auth().currentUser)
+                        }
+                    var uid_child = storiesUserOwnedRef.child(_uid)
+                    var uid_child_new_story_child = uid_child.child(newStoryRef.key)
+                    uid_child_new_story_child.set(story)
+                    /*
+                    var parent = {
+                        [_uid]: {}
+                    }
 
-                    storiesRef.push(story)
+                    storiesUserOwnedRef.push(parent)
+
+                    storiesUserOwnedRef.child(_uid).push(
+                        {
+                            [newStoryRef.key]: {
+                                story
+                            }
+                        }
+                    )
+                    */
+                    //.child([_uid])
+                    /*
+                    var newUserOwnedStory = {
+                        [_uid]: {
+                            [newStoryRef.key]:{
+                                userId: the_user,
+                                who: this.who, 
+                                what: this.what, 
+                                why: this.why, 
+                                acceptance_criteria: this.acceptance_criteria, 
+                                show_ac: true,
+                                created_on: the_date
+                            }
+                        }
+                    }
+                    */
+
+                    //storiesUserOwnedRef.child(_uid).push(newUserOwnedStory)
+
+
+                    
+
+
+                    
+                    
+                    
+                    //this.stories.push(story)
+                    newStoryRef.set(story)
+                    
+                    //storiesRef.push(story)
                     this.who = '';
                     this.what = '';
                     this.why = '';
@@ -124,6 +176,7 @@ export default {
           });
     },
     deleteStory: function(i) {
+        /* obsolete function, can be removed */
         console.log("DELETE CLICKED")
         this.stories.splice(i, 1);
     },

@@ -1,0 +1,19 @@
+function isUser (auth, userKey) {
+    return auth.id == userKey
+}
+
+function isOwner (uid) {
+    return uid == auth.uid
+}
+
+path /stories/{uid} {
+    /read { isOwner(uid) }
+}
+
+isLoggedIn() { auth != null }
+isCurrentUser(userid) { currentUser() == userid }
+currentUser() { auth.uid }
+fullId(userid, ownerid, docid) { userid + '|' + ownerid + '|' + docid }
+hasPermission(ownerid, docid, p) { root.permissions[fullId(currentUser(), ownerid, docid)][p] }
+docIsOwnedBy(docid, userid) { root.documents[userid][docid] != null }
+userExists(userid) { root.users[userid] != null }
