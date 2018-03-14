@@ -161,7 +161,7 @@ export default {
     },
     removeStory: function(story) {
         storiesRef.child(story['.key']).remove()
-        storiesUserOwnedRef.child(this.user.uid).child(story['key']).remove()
+        storiesUserOwnedRef.child(this.user.uid).child(story['.key']).remove()
     },
     toggleAcceptanceCriteria: function(story) {
         console.log("AC CLICKED")
