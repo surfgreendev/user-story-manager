@@ -111,7 +111,7 @@ export default {
               {who: "Product Manager", what: "do sth", why: "So that ...", acceptance_criteria: "nope", show_ac: "false"},
               {who: "Consultsnt", what: "do sth", why: "So that ...", acceptance_criteria: "nope", show_ac: "false"}
             ],
-          loggedInUserUid: firebase.auth().currentUser.uid
+          user: {}
       }
   },
   methods: {
@@ -161,12 +161,23 @@ export default {
     },
     removeStory: function(story) {
         storiesRef.child(story['.key']).remove()
-        storiesUserOwnedRef.child(firebase.auth().currentUser.uid).child(story['key']).remove()
+        storiesUserOwnedRef.child(this.user.uid).child(story['key']).remove()
     },
     toggleAcceptanceCriteria: function(story) {
         console.log("AC CLICKED")
         story.show_ac = !story.show_ac;
     },
+  },
+  beforeCreate: function() {
+      firebase.auth().onAuthStateChanged((user) => {
+          console.log("USER", user)
+          if (user) {
+              this.user = user
+          }
+          else {
+              console.log("ERROR USER NOT SIGNED IN")
+          }
+      })
   }
 }
 </script>
