@@ -37,8 +37,9 @@
         <div class="container grid-lg story-list">
             <div class="columns">
                 <div class="column col-12">
+                    <p>{{dbStoriesUserOwnedListing}}</p>
                     <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceInDown">
-                        <div class="card" v-for="(story, index) in dbstories" :key='index'> 
+                        <div class="card" v-for="(story, index) in this.dbStoriesUserOwnedListing" :key='index'> 
                             <div class="card-header">
                                 <div class="card-title h5">{{story.who}} - {{story.what}} - {{story.why}}</div>
                                 <div class="card-subtitle text-gray">User Story ID {{index}} {{story.show_ac}}</div>
@@ -72,18 +73,34 @@ import {firebaseApp} from '../db'
 
 let db = firebaseApp.database()
 
-var storiesRef = db.ref('stories')
-var storiesUserOwnedRef = db.ref('storiesUserOwned')
+/*
+@todo: NEXT -> Get the uid from loggedin user so that app does not crash
 
+*/
+
+// Firebase References
+let storiesRef = db.ref('stories')
+let storiesUserOwnedRef = db.ref('storiesUserOwned/')//' + firebase.auth().currentUser.uid)
+//console.log("FIRBASE USER", firebase.auth().currentUser.uid)
+//const loggedInUserId = firebase.auth().currentUser.uid
+//console.log("THE LOGGED IN USER", loggedInUserId)
 export default {
   name: 'ListStories',
   components: {
       VueMarkdown,
       Header
   },
-  firebase: {
-      dbstories: storiesRef.limitToLast(25)
+  firebase() {
+      const loggedInUserUid = firebase.auth().currentUser.uid
+      return {
+          dbStoriesUserOwnedListing: db.ref('storiesUserOwned/' + loggedInUserUid)
+      }
   },
+  /*
+  firebase: {
+      dbStories: storiesRef.limitToLast(25),
+      dbStoriesUserOwnedListing: db.ref('storiesUserOwned/' + firebase.auth().currentUser.uid)
+  },*/
   data() {
       return {
           who: '',
@@ -93,7 +110,8 @@ export default {
           stories: [
               {who: "Product Manager", what: "do sth", why: "So that ...", acceptance_criteria: "nope", show_ac: "false"},
               {who: "Consultsnt", what: "do sth", why: "So that ...", acceptance_criteria: "nope", show_ac: "false"}
-            ]
+            ],
+          loggedInUserUid: firebase.auth().currentUser.uid
       }
   },
   methods: {
@@ -143,13 +161,13 @@ export default {
     },
     removeStory: function(story) {
         storiesRef.child(story['.key']).remove()
+        storiesUserOwnedRef.child(firebase.auth().currentUser.uid).child(story['key']).remove()
     },
     toggleAcceptanceCriteria: function(story) {
         console.log("AC CLICKED")
         story.show_ac = !story.show_ac;
     },
-    
-  } 
+  }
 }
 </script>
 

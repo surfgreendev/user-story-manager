@@ -78,6 +78,7 @@ export default {
               user => {
                   console.log("USER HAS BEEN CREATED", user)
                   user.updateProfile({displayName: this.displayname})
+                  let userRefChild = usersRef.child(user.uid)
                   usersRef.push({
                       userId: user.uid,
                       name: user.providerData[0].displayName,
