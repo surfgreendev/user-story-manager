@@ -74,16 +74,26 @@ import {firebaseApp} from '../db'
 let db = firebaseApp.database()
 
 /*
-@todo: NEXT -> Get the uid from loggedin user so that app does not crash
+@todo: NEXT 
+* Show Story Count
+* Save user name when story is added
+* Show creation date
+* Show the id of the storiy
+* Update view - Really Update the data
+* Filter, Search and sort data
+
+* Add Tags to stories
+* Make stories exportable as json/csv
+
+* Rating for stories
+* Story Points for stories
 
 */
 
 // Firebase References
 let storiesRef = db.ref('stories')
-let storiesUserOwnedRef = db.ref('storiesUserOwned/')//' + firebase.auth().currentUser.uid)
-//console.log("FIRBASE USER", firebase.auth().currentUser.uid)
-//const loggedInUserId = firebase.auth().currentUser.uid
-//console.log("THE LOGGED IN USER", loggedInUserId)
+let storiesUserOwnedRef = db.ref('storiesUserOwned/')
+
 export default {
   name: 'ListStories',
   components: {
@@ -93,14 +103,9 @@ export default {
   firebase() {
       const loggedInUserUid = firebase.auth().currentUser.uid
       return {
-          dbStoriesUserOwnedListing: db.ref('storiesUserOwned/' + loggedInUserUid)
+          dbStoriesUserOwnedListing: db.ref('storiesUserOwned/' + loggedInUserUid),
       }
   },
-  /*
-  firebase: {
-      dbStories: storiesRef.limitToLast(25),
-      dbStoriesUserOwnedListing: db.ref('storiesUserOwned/' + firebase.auth().currentUser.uid)
-  },*/
   data() {
       return {
           who: '',
