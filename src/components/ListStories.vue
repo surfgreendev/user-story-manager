@@ -37,12 +37,13 @@
         <div class="container grid-lg story-list">
             <div class="columns">
                 <div class="column col-12">
+                    <h1>You have {{this.dbStoriesUserOwnedListing.length}} Stories in your backlog</h1>
                     <p>{{dbStoriesUserOwnedListing}}</p>
                     <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceInDown">
                         <div class="card" v-for="(story, index) in this.dbStoriesUserOwnedListing" :key='index'> 
                             <div class="card-header">
                                 <div class="card-title h5">{{story.who}} - {{story.what}} - {{story.why}}</div>
-                                <div class="card-subtitle text-gray">User Story ID {{index}} {{story.show_ac}}</div>
+                                <div class="card-subtitle text-gray">created by {{story.userName}} on {{new Date(story.created_on)}}</div>
                             </div>
                             <div class="card-body">
                                 <p>As a {{story.who}} I'd like to {{story.what}}, so that {{story.why}}</p>
@@ -75,9 +76,9 @@ let db = firebaseApp.database()
 
 /*
 @todo: NEXT 
-* Show Story Count
-* Save user name when story is added
-* Show creation date
+* Show Story Count - DONE
+* Save user name when story is added - DONE
+* Show creation date - DONE - BUT DO IT WITH 4 minutes ago, etc.
 * Show the id of the storiy
 * Update view - Really Update the data
 * Filter, Search and sort data
@@ -87,6 +88,8 @@ let db = firebaseApp.database()
 
 * Rating for stories
 * Story Points for stories
+
+* If user id does not exist - block add buttons and icons with v-if
 
 */
 
@@ -129,6 +132,7 @@ export default {
                     // create the story object 
                     let story = {
                             userId: _uid,
+                            userName: this.user.displayName,
                             who: this.who, 
                             what: this.what, 
                             why: this.why, 
