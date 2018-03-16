@@ -42,7 +42,7 @@
                     <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceInDown">
                         <div class="card" v-for="(story, index) in this.dbStoriesUserOwnedListing" :key='index'> 
                             <div class="card-header">
-                                <div class="card-title h5">{{story.who}} - {{story.what}} - {{story.why}}</div>
+                                <div class="card-title h5"><small>id: {{story['.key']}} | votes: {{story.votes}}</small></div>
                                 <div class="card-subtitle text-gray">created by {{story.userName}} on {{new Date(story.created_on)}}</div>
                             </div>
                             <div class="card-body">
@@ -55,6 +55,9 @@
                                         <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-default btn-sm"><i v-if="!story.show_ac" class="icon icon-arrow-up"></i> <i v-if="story.show_ac" class="icon icon-arrow-down"></i>Acceptance Criteria</button></li>
                                         <li>  <router-link :to="{ name: 'UpdateStory', params: { storyId: index }}"><i class="icon icon-edit"></i></router-link></li>
                                         <li><i v-on:click="removeStory(story)" class="icon icon-delete"></i></li>
+                                        <li>|</li>
+                                        <li><span v-on:click="voteStory(story['.key'], true)"><i class="icon icon-upward"></i> <small>Upvote</small></span></li>
+                                       <li><span v-on:click="voteStory(story['.key'], false)"><i class="icon icon-downward"></i> <small>Downvote</small></span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -79,14 +82,16 @@ let db = firebaseApp.database()
 * Show Story Count - DONE
 * Save user name when story is added - DONE
 * Show creation date - DONE - BUT DO IT WITH 4 minutes ago, etc.
-* Show the id of the storiy
+* Show the id of the storiy - DONE
 * Update view - Really Update the data
 * Filter, Search and sort data
 
 * Add Tags to stories
 * Make stories exportable as json/csv
 
-* Rating for stories
+* Rating for stories upvote/downvote -> DONE
+* Set UpVote/DownVote per story so that a user can only upvote or downvote once
+* Setup the security roles for the votes
 * Story Points for stories
 
 * If user id does not exist - block add buttons and icons with v-if
@@ -123,6 +128,31 @@ export default {
       }
   },
   methods: {
+    voteStory: function(storyId, isUpVote) {
+
+        let storyToUpvoteRef = storiesUserOwnedRef.child(this.user.uid).child(storyId).child("votes")
+
+        if (isUpVote) {
+            // Add one vote
+            // Get item from firebase and increment the votes
+            storyToUpvoteRef.transaction(function(currentVotes){
+                
+                console.log("CURRENT VOTES", currentVotes)
+                let newValue = currentVotes + 1
+                return newValue
+            })
+        }
+        else {
+            // Downvote
+            storyToUpvoteRef.transaction(function(currentVotes){
+                
+                console.log("CURRENT VOTES", currentVotes)
+                let newValue = currentVotes - 1
+                return newValue
+            })
+        }
+        
+    },
     addStory: function() {
           this.$validator.validateAll().then((result) => {
               if (result) {
@@ -138,6 +168,7 @@ export default {
                             why: this.why, 
                             acceptance_criteria: this.acceptance_criteria, 
                             show_ac: true,
+                            votes: 0,
                             created_on: the_date
                     }
 
