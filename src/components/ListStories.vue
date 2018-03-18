@@ -5,24 +5,25 @@
             <div class="container grid-lg">
                 <div class="columns">
                     <div class="column col-12">
+                        <div v-if="fbError" class="toast toast-error">
+                               {{fbErrorMsg}}
+                        </div>
                         <form @submit.prevent="addStory">
-                            <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
-                                <p class="alert" v-if="errors.has('who')">{{errors.first('who')}}</p>
-                            </transition>
+                            
                             <div class="columns">
                                 <div class="column col-xs-12">
                                     <label class="form-label label-lg">As a </label> 
-                                    <input class="form-input input-lg" placeholder="Who" name="who" type="text" v-model="who" v-validate="'min:2'" :class="{'input': true, 'is-error': errors.has('who')}" />
+                                    <input class="form-input input-lg" placeholder="Who" name="who" type="text" v-model="who" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('who')}" />
                                     <p v-show="errors.has('who')" class="form-input-hint">{{ errors.first('who') }}</p>
                                 </div>
                                 <div class="column col-xs-12">
                                     <label class="form-label label-lg">I'd like to </label> 
-                                    <input class="form-input input-lg" placeholder="What" name="what" type="text" v-model="what" v-validate="'min:2'" :class="{'input': true, 'is-error': errors.has('what')}" />
+                                    <input class="form-input input-lg" placeholder="What" name="what" type="text" v-model="what" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('what')}" />
                                     <p v-show="errors.has('what')" class="form-input-hint">{{ errors.first('what') }}</p>
                                 </div>
                                 <div class="column col-xs-12">
                                     <label class="form-label label-lg">so that </label> 
-                                    <input class="form-input input-lg" placeholder="Why" name="why" type="text" v-model="why"  v-validate="'min:2'" :class="{'input': true, 'is-error': errors.has('why')}">
+                                    <input class="form-input input-lg" placeholder="Why" name="why" type="text" v-model="why"  v-validate="'required'" :class="{'input': true, 'is-error': errors.has('why')}">
                                     <p v-show="errors.has('why')" class="form-input-hint">{{ errors.first('why') }}</p>
 
                                 </div>
@@ -101,7 +102,7 @@ let db = firebaseApp.database()
 * Show the id of the storiy - DONE
 * Update view - Really Update the data
 * Filter, Search and sort data
-
+* Do Backlog Grooming View
 * Add Tags to stories
 * Make stories exportable as json/csv
 
@@ -112,7 +113,7 @@ let db = firebaseApp.database()
 * Story Points for stories
 
 * If user id does not exist - block add buttons and icons with v-if
-
+* Validate Reset with https://github.com/baianat/vee-validate/issues/209
 */
 
 // Firebase References
@@ -142,7 +143,10 @@ export default {
               {who: "Consultsnt", what: "do sth", why: "So that ...", acceptance_criteria: "nope", show_ac: "false"}
             ],
           user: {},
-          fbError: false
+          fbError: false,
+          fbErrorMsg: '',
+          businessValue: 0,
+          storyPoints: 0
       }
   },
   methods: {
@@ -172,6 +176,9 @@ export default {
         
     },
     addStory: function() {
+        // @todo: validation does not work correctly
+
+
           this.$validator.validateAll().then((result) => {
               if (result) {
                     let the_date =  Date.now()
@@ -211,8 +218,19 @@ export default {
                     this.why = '';
                     this.acceptance_criteria = '';
                     
+                    // Reset Validation
+                    this.$nextTick().then(() => {
+                        this.$validator.reset()
+                        this.errors.clear();
+                        this.fbError = false
+                        this.fbErrorMsg = ''
+                    })
+                    
               } else {
                     console.log("NOT VALID") //@todo: Emit error message in UI from form validation in create form
+                    this.fbErrorMsg = "The form is not valid! Please correct the errors!"
+                    this.fbError = true
+
               }
           });
     },
