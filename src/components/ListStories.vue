@@ -20,7 +20,14 @@
                                     <label class="form-label label-lg">so that </label> <input class="form-input input-lg" placeholder="Why" name="why" type="text" v-model="why">
                                 </div>
                             </div>
-                           
+                            <div class="columns">
+                                <div class="column col-xs-12">
+                                    <label class="form label">Story Points:</label> <input class="form-input" placeholder="Story Points" name="story_points" type="number" v-model="storyPoints">
+                                </div>
+                                <div class="column col-xs-12">
+                                    <label class="form label">Business Value:</label> <input class="form-input" placeholder="Business Value" name="business_value" type="number" v-model="businessValue">
+                                </div>
+                            </div>
                             <div class="acceptance-criterias-block form-group">
                                 <label class="form-label">Acceptance Criterias: </label>
                                 <textarea class="form-input" rows="10" placeholder="Enter Acceptance Criteria in Markdown here" name="acceptance_criteria" v-model="acceptance_criteria" />
@@ -42,7 +49,7 @@
                     <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceInDown">
                         <div class="card" v-for="(story, index) in this.dbStoriesUserOwnedListing" :key='index'> 
                             <div class="card-header">
-                                <div class="card-title h5"><small>id: {{story['.key']}} | votes: {{story.votes}}</small></div>
+                                <div class="card-title h5"><small>id: {{story['.key']}} | votes: {{story.votes}} | points: {{story.storyPoints}} | value: {{story.businessValue}}</small></div>
                                 <div class="card-subtitle text-gray">created by {{story.userName}} on {{new Date(story.created_on)}}</div>
                             </div>
                             <div class="card-body">
@@ -91,7 +98,8 @@ let db = firebaseApp.database()
 
 * Rating for stories upvote/downvote -> DONE
 * Set UpVote/DownVote per story so that a user can only upvote or downvote once
-* Setup the security roles for the votes
+* Setup the security roles for the votes as stated here: https://stackoverflow.com/questions/42276881/increment-firebase-value-from-javascript-subject-to-constraint
+
 * Story Points for stories
 
 * If user id does not exist - block add buttons and icons with v-if
@@ -169,6 +177,10 @@ export default {
                             acceptance_criteria: this.acceptance_criteria, 
                             show_ac: true,
                             votes: 0,
+                            businessValue: this.businessValue,
+                            storyPoints: this.storyPoints,
+                            hasUpVoted: false,
+                            hasDownVoted: false,
                             created_on: the_date
                     }
 
