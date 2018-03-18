@@ -25,7 +25,6 @@
                                     <label class="form-label label-lg">so that<small>*</small> </label> 
                                     <input class="form-input input-lg" placeholder="Why" name="why" type="text" v-model="why"  v-validate="'required'" :class="{'input': true, 'is-error': errors.has('why')}">
                                     <p v-show="errors.has('why')" class="form-input-hint">{{ errors.first('why') }}</p>
-
                                 </div>
                             </div>
                             <div class="columns">
@@ -94,15 +93,17 @@ import {firebaseApp} from '../db'
 
 let db = firebaseApp.database()
 
-/*
+/** 
 @todo: NEXT 
 * Show Story Count - DONE
 * Save user name when story is added - DONE
 * Show creation date - DONE - BUT DO IT WITH 4 minutes ago, etc.
 * Show the id of the storiy - DONE
-* Update view - Really Update the data 
+* Update view - Really Update the data - DONE
 * Filter, Search and sort data
-* Do Backlog Grooming View
+* Do Backlog Grooming View: 
+* @todo: Rearange positions 
+* @todo: Inline Editing
 * Add Tags to stories
 * Make stories exportable as json/csv
 

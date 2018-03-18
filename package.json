@@ -1,8 +1,8 @@
 {
   "name": "user-story-manager",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "Carl Bednorz <carl@frnkn.com>",
+  "description": "Create and manage user stories - the easy way",
+  "author": "Carl Bednorz <carl@studiofrnkn.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

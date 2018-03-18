@@ -4,6 +4,7 @@ import ListStories from '@/components/ListStories'
 import UpdateStory from '@/components/UpdateStory'
 import SignUp from '@/components/SignUp'
 import SignIn from '@/components/SignIn'
+import Home from '@/components/Home'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -16,7 +17,8 @@ let router = new Router({
     },
     {
       path: '/',
-      redirect: '/signin'
+      name: 'Home',
+      component: Home
     },
     {
       path: '/stories',

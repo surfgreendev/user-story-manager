@@ -5,7 +5,7 @@
         <div class="container grid-lg">
             <div class="columns">
                 <div class="column col-12">
-                    <h1> Update Your User Story With ID {{ $route.params.storyId }}</h1>
+                    <h1>Update Your User Story With ID {{ $route.params.storyId }}</h1>
                     <div v-if="fbError" class="toast toast-error">
                             {{fbErrorMsg}}
                     </div>
@@ -67,8 +67,8 @@ let storiesRef = db.ref('stories')
 let storiesUserOwnedRef = db.ref('storiesUserOwned/')
 
 /**
- * @todo: Form Validation
- * @todo: business points and value
+ * @todo: Form Validation - DONE
+ * @todo: business points and value - DONE
  * */
 
 export default {
@@ -77,31 +77,6 @@ export default {
       UserStoryUpdateForm,
       Header
   },
-  /*firebase() {
-      
-      return {
-        storyUserOwned: {
-            source: storiesUserOwnedRef.child(this.user.uid).child(this.storyId),
-            asObject: true
-        },
-        story: {
-            source: storiesRef.child(this.storyId),
-            asObject: true
-        }
-      }
-  },*/
-  /*
-  firebase: {
-      storyUserOwned: {
-            source: storiesUserOwnedRef.child(this.user.uid).child(this.storyId),
-            asObject: true
-        },
-        story: {
-            source: storiesRef.child(this.storyId),
-            asObject: true
-        }
-  },*/
- 
   data () {
       return {
           storyId: null,
@@ -133,7 +108,7 @@ export default {
                     this.fbErrorMsg = ''
 
                 }) 
-                
+
                 this.$router.push({path: '/stories'})
             }
             else {
