@@ -1,6 +1,6 @@
 # user-story-manager
 
-> A Vue.js project
+> Create and manage user stories for product backlogs the easy way
 
 ## Build Setup
 
