@@ -110,10 +110,7 @@ export default {
         //Set who, what, why, acc_criteria, story points, business value
         //console.log("STORIES REF", this.storyUserOwned)
 
-        //this.$router.push({path: '/'})
-
-
-        
+        this.$router.push({path: '/stories'})
       }
   },
   mounted: function() {
