@@ -12,17 +12,17 @@
                             
                             <div class="columns">
                                 <div class="column col-xs-12">
-                                    <label class="form-label label-lg">As a </label> 
+                                    <label class="form-label label-lg">As a<small>*</small> </label> 
                                     <input class="form-input input-lg" placeholder="Who" name="who" type="text" v-model="who" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('who')}" />
                                     <p v-show="errors.has('who')" class="form-input-hint">{{ errors.first('who') }}</p>
                                 </div>
                                 <div class="column col-xs-12">
-                                    <label class="form-label label-lg">I'd like to </label> 
+                                    <label class="form-label label-lg">I'd like to<small>*</small> </label> 
                                     <input class="form-input input-lg" placeholder="What" name="what" type="text" v-model="what" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('what')}" />
                                     <p v-show="errors.has('what')" class="form-input-hint">{{ errors.first('what') }}</p>
                                 </div>
                                 <div class="column col-xs-12">
-                                    <label class="form-label label-lg">so that </label> 
+                                    <label class="form-label label-lg">so that<small>*</small> </label> 
                                     <input class="form-input input-lg" placeholder="Why" name="why" type="text" v-model="why"  v-validate="'required'" :class="{'input': true, 'is-error': errors.has('why')}">
                                     <p v-show="errors.has('why')" class="form-input-hint">{{ errors.first('why') }}</p>
 
@@ -70,7 +70,7 @@
                                 <div class="text-right">
                                     <ul class="list-inline">
                                         <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-default btn-sm"><i v-if="!story.show_ac" class="icon icon-arrow-up"></i> <i v-if="story.show_ac" class="icon icon-arrow-down"></i>Acceptance Criteria</button></li>
-                                        <li>  <router-link :to="{ name: 'UpdateStory', params: { storyId: index }}"><i class="icon icon-edit"></i></router-link></li>
+                                        <li>  <router-link :to="{ name: 'UpdateStory', params: { storyId: story['.key'] }}"><i class="icon icon-edit"></i></router-link></li>
                                         <li><i v-on:click="removeStory(story)" class="icon icon-delete"></i></li>
                                         <li>|</li>
                                         <li><span v-on:click="voteStory(story['.key'], true)"><i class="icon icon-upward"></i> <small>Upvote</small></span></li>
@@ -100,7 +100,7 @@ let db = firebaseApp.database()
 * Save user name when story is added - DONE
 * Show creation date - DONE - BUT DO IT WITH 4 minutes ago, etc.
 * Show the id of the storiy - DONE
-* Update view - Really Update the data
+* Update view - Really Update the data 
 * Filter, Search and sort data
 * Do Backlog Grooming View
 * Add Tags to stories
@@ -110,10 +110,11 @@ let db = firebaseApp.database()
 * Set UpVote/DownVote per story so that a user can only upvote or downvote once
 * Setup the security roles for the votes as stated here: https://stackoverflow.com/questions/42276881/increment-firebase-value-from-javascript-subject-to-constraint
 
-* Story Points for stories
+* Story Points for stories - DONE
 
 * If user id does not exist - block add buttons and icons with v-if
-* Validate Reset with https://github.com/baianat/vee-validate/issues/209
+* Validate Reset with https://github.com/baianat/vee-validate/issues/209 - DONE
+* Cursor Styling for icon links in cards
 */
 
 // Firebase References
@@ -198,7 +199,8 @@ export default {
                             storyPoints: this.storyPoints,
                             hasUpVoted: false,
                             hasDownVoted: false,
-                            created_on: the_date
+                            created_on: the_date,
+                            updated_on: the_date
                     }
 
                     // Get a <storyuid>
@@ -224,6 +226,7 @@ export default {
                         this.errors.clear();
                         this.fbError = false
                         this.fbErrorMsg = ''
+
                     })
                     
               } else {
