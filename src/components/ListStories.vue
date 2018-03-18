@@ -11,21 +11,30 @@
                             </transition>
                             <div class="columns">
                                 <div class="column col-xs-12">
-                                    <label class="form-label label-lg">As a </label> <input class="form-input input-lg" placeholder="Who" name="who" type="text" v-model="who" v-validate="'min:2'">
+                                    <label class="form-label label-lg">As a </label> 
+                                    <input class="form-input input-lg" placeholder="Who" name="who" type="text" v-model="who" v-validate="'min:2'" :class="{'input': true, 'is-error': errors.has('who')}" />
+                                    <p v-show="errors.has('who')" class="form-input-hint">{{ errors.first('who') }}</p>
                                 </div>
                                 <div class="column col-xs-12">
-                                    <label class="form-label label-lg">I'd like to </label> <input class="form-input input-lg" placeholder="What" name="what" type="text" v-model="what">
+                                    <label class="form-label label-lg">I'd like to </label> 
+                                    <input class="form-input input-lg" placeholder="What" name="what" type="text" v-model="what" v-validate="'min:2'" :class="{'input': true, 'is-error': errors.has('what')}" />
+                                    <p v-show="errors.has('what')" class="form-input-hint">{{ errors.first('what') }}</p>
                                 </div>
                                 <div class="column col-xs-12">
-                                    <label class="form-label label-lg">so that </label> <input class="form-input input-lg" placeholder="Why" name="why" type="text" v-model="why">
+                                    <label class="form-label label-lg">so that </label> 
+                                    <input class="form-input input-lg" placeholder="Why" name="why" type="text" v-model="why"  v-validate="'min:2'" :class="{'input': true, 'is-error': errors.has('why')}">
+                                    <p v-show="errors.has('why')" class="form-input-hint">{{ errors.first('why') }}</p>
+
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column col-xs-12">
-                                    <label class="form label">Story Points:</label> <input class="form-input" placeholder="Story Points" name="story_points" type="number" v-model="storyPoints">
+                                    <label class="form label">Story Points:</label> 
+                                    <input class="form-input" placeholder="Story Points" name="story_points" type="number" v-model="storyPoints">
                                 </div>
                                 <div class="column col-xs-12">
-                                    <label class="form label">Business Value:</label> <input class="form-input" placeholder="Business Value" name="business_value" type="number" v-model="businessValue">
+                                    <label class="form label">Business Value:</label> 
+                                    <input class="form-input" placeholder="Business Value" name="business_value" type="number" v-model="businessValue">
                                 </div>
                             </div>
                             <div class="acceptance-criterias-block form-group">
@@ -132,7 +141,8 @@ export default {
               {who: "Product Manager", what: "do sth", why: "So that ...", acceptance_criteria: "nope", show_ac: "false"},
               {who: "Consultsnt", what: "do sth", why: "So that ...", acceptance_criteria: "nope", show_ac: "false"}
             ],
-          user: {}
+          user: {},
+          fbError: false
       }
   },
   methods: {
