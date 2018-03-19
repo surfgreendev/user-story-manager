@@ -1,34 +1,51 @@
 <template>
 <div class="wrapper">
-    <nav>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            LAYLA
+        </a>
         <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Layla</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+            <li>Login</li>
         </ul>
     </nav>
-    <div class="teaser__jumbo jumbotron jumbotron-fluid ta-start-page-jumbo">
+    <div class="teaser__jumbo jumbotron jumbotron-fluid text-center ta-start-page-jumbo">
+        
+        <div class="container-fluid">
+            <!-- As a heading -->
+            
+        </div>
         <div class="container">
-
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-            </p>
+            <div class="row">
+                <div class="col-12 text-center">
+                     <h2 class="display-5"><strong>Todo lists for agile software projects</strong><hr class="h-teaser-line">Easily Manage Backlogs & User Stories</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <small class="muted">#1 | User Story | short id: FRNKN-1</small>
+                        </div>
+                        <div class="card-block">
+                            <p class="card-text jumbo-story-text-1 lead"></p>
+                            <ul class="list-inline">
+                                <li class="list-inline-item">Story Points: 5</li>
+                                <li class="list-inline-item">Business Value: 130</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12 text-center">
+                    <ul class="list-inline">
+                        <button class="btn btn-primary">Signup</button>
+                        <button class="btn btn-link">Learn more</button>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container">
