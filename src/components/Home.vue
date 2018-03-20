@@ -9,7 +9,7 @@
             <li>Login</li>
         </ul>
     </nav>
-    <div class="teaser__jumbo jumbotron jumbotron-fluid text-center ta-start-page-jumbo">
+    <div class="teaser__jumbo jumbotron jumbotron-fluid  ta-start-page-jumbo">
         
         <div class="container-fluid">
             <!-- As a heading -->
@@ -18,17 +18,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                     <h2 class="display-5"><strong>Todo lists for agile software projects</strong><hr class="h-teaser-line">Easily Manage Backlogs & User Stories</h2>
+                     <h2 class="display-5"><strong>Requirements for Agile Software Projects</strong><hr class="h-teaser-line">Easily Manage Backlogs & User Stories</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-10">
-                    <div class="card">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <div class="card teaser__card">
                         <div class="card-header">
-                            <small class="muted">#1 | User Story | short id: FRNKN-1</small>
+                            <small class="muted">#1 | User Story | short id: STORY-1</small>
                         </div>
-                        <div class="card-block">
-                            <p class="card-text jumbo-story-text-1 lead"></p>
+                        <div class="card-body">
+                            <p class="card-text jumbo-story-text-1 lead">
+                                As a Product Manager I'd like to create awesome user stories with Leyla so that I can create perfect specs for my scrum team.
+                            </p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">Story Points: 5</li>
                                 <li class="list-inline-item">Business Value: 130</li>
@@ -36,12 +39,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-2"></div>
+                
             </div>
             
             <div class="row">
                 <div class="col-12 text-center">
                     <ul class="list-inline">
-                        <button class="btn btn-primary">Signup</button>
+                        <button class="btn btn-primary">Sign up for free</button>
                         <button class="btn btn-link">Learn more</button>
                     </ul>
                 </div>
@@ -52,10 +57,10 @@
     <div class="row cm__box cm__box--text">
         <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="text-xs-center">
-            <h2>About FRNKN - How it works</h2>
+            <h2>About</h2>
             <hr class="hr-content">
-
-            <p class="lead">FRNKN lets you manage epics, user stories, acceptance criteria and software requirements. Our feature rich project backlogs support your agile development and project management workflow.
+            <h3>What is LEYLA?</h3>
+            <p class="lead">LEYLA lets you manage epics, user stories, acceptance criteria and software requirements. Our feature rich project backlogs support your agile development and project management workflow.
             We are currently under heavy development. Subscribe now and get notified when we'll have launched our beta programm.
             Subscribers will get a special early bird offer and an exclusive beta account!</p>
             <br>
@@ -67,19 +72,20 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="text-xs-center">
             <br><br>
-            <h2>FRNKN - Features</h2>
+            <h2>Features</h2>
             <hr class="hr-content">
+            <h3>How LEYLA empowers you to create great user stories and to manage your project backlog</h3>
         </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-md-4">
-            <div class="card text-xs-center">
+            <div class="card text-center">
             <div class="card-block">
                 <h3 class="card-title">Backlogs</h3>
                 <h6 class="card-subtitle text-muted">Manage multiple project backlogs.</h6>
             </div>
-            <img class="card-img-top" style="width:100%;" src="/static/content/start_page/frnkn_1.jpg" alt="FRNKN - Manage multiple project backlogs with epics, user stories, acceptance criterias and use cases">
+            <img class="card-img-top" style="width:100%;" src="/assets/img/frnkn_1.jpg" alt="FRNKN - Manage multiple project backlogs with epics, user stories, acceptance criterias and use cases">
 
             <div class="card-block">
                 <p class="card-text">FRNKN lets you manage epics, user stories and non functional requirements in a dramatically easy way.</p>
@@ -87,12 +93,12 @@
             </div>
         </div>
         <div class="col-xs-12 col-md-4">
-            <div class="card text-xs-center">
+            <div class="card text-center">
             <div class="card-block">
                 <h3 class="card-title">Sofware Specs</h3>
                 <h6 class="card-subtitle text-muted">Manage User Stories and more.</h6>
             </div>
-            <img class="card-img-top" style="width:100%;" src="/static/content/start_page/frnkn_2.jpg" alt="Simply manage and create user stories for agile development">
+            <img class="card-img-top" style="width:100%;" src="/assets/img/frnkn_2.jpg" alt="Simply manage and create user stories for agile development">
 
             <div class="card-block">
                 <p class="card-text">Create, update and break down epics and user stories in a super fast and intuitive manner, to save time and costs.</p>
@@ -100,12 +106,12 @@
             </div>
         </div>
         <div class="col-xs-12 col-md-4">
-            <div class="card text-xs-center">
+            <div class="card text-center">
             <div class="card-block">
                 <h3 class="card-title">Collaboration</h3>
                 <h6 class="card-subtitle text-muted">Specs for dev teams.</h6>
             </div>
-            <img class="card-img-top" style="width:100%;" src="/static/content/start_page/frnkn_3.jpg" alt="Software specification for teams. Collaborate with engineers, product owners and stakeholders on user stories and more.">
+            <img class="card-img-top" style="width:100%;" src="/assets/img/frnkn_3.jpg" alt="Software specification for teams. Collaborate with engineers, product owners and stakeholders on user stories and more.">
 
             <div class="card-block">
                 <p class="card-text">Filter, sort and reprioritize backlog items within highly customizable list and grid views. Export backlog items to printable post its.</p>
@@ -118,31 +124,72 @@
         <div class="col-xs-12">
         <br><br>
         <div class="text-xs-center">
-            <h2>FRNKN - Frequently Asked Questions</h2>
+            <h2>Frequently Asked Questions</h2>
             <hr class="hr-content">
+            <h3>Here are answers to the most asked questions about LEYLA</h3>
         </div>
 
         <dl class="dl-horizontal dl__faq">
-            <dt class="col-sm-3"><h4>What is FRNKN?</h4></dt>
-            <dd class="col-sm-9 lead">FRNKN is a new, sophisticated app that allows product owners, managers and software development teams to easily create, organize, manage and discuss
+            <dt class="col-sm-3"><h4>What is LEYLA?</h4></dt>
+            <dd class="col-sm-9 lead">LEYLA is a new, sophisticated app that allows product owners, managers and software development teams to easily create, organize, manage and discuss
             agile software specifications.</dd>
 
-            <dt class="col-sm-3"><h4>How does FRNKN work?</h4></dt>
-            <dd class="col-sm-9 lead">FRNKN allows you to create backlogs that hold backlog items, such as user stories, epics or non functional requirements. You can create, update, archive or breakdown user stories, attach wireframes or documents, write acceptance criterias and notes (with markdown). You can even prioritize backlog items, add story points and business values and print your backlog onto cards.</dd>
+            <dt class="col-sm-3"><h4>How does LEYLA work?</h4></dt>
+            <dd class="col-sm-9 lead">LEYLA allows you to create backlogs that hold backlog items, such as user stories, epics or non functional requirements. You can create, update, archive or breakdown user stories, attach wireframes or documents, write acceptance criterias and notes (with markdown). You can even prioritize backlog items, add story points and business values and print your backlog onto cards.</dd>
 
-            <dt class="col-sm-3"><h4>Who is FRNKN?</h4></dt>
-            <dd class="col-sm-9 lead">Behind FRNKN stands a small team of experienced product managers & product owners and software engineers with +8 years of experience in e-commerce, digital advertising and really large relaunch projects. 
+            <dt class="col-sm-3"><h4>Who is LEYLA?</h4></dt>
+            <dd class="col-sm-9 lead">Behind LEYLA stands a small team of experienced product managers & product owners and software engineers with +8 years of experience in e-commerce, digital advertising and really large relaunch projects. 
 
-            <dt class="col-sm-3"><h4>When is FRNKN available?</h4></dt>
+            <dt class="col-sm-3"><h4>When is LEYLA available?</h4></dt>
             <dd class="col-sm-9 lead">We're working hard on the project. Besides having a full time job and a family we will launch the public version of FRNKN around Summer/Autumn 2017. Invitations for beta/early bird accounts will be send as soon as possible.</dd>
 
             <dt class="col-sm-3"><h4>How much will it cost?</h4></dt>
-            <dd class="col-sm-9 lead">FRNKN is more than just a simple side project, but we will offer fair prices.</dd>
+            <dd class="col-sm-9 lead">LEYLA is more than just a simple side project, but we will offer fair prices.</dd>
 
         </dl>
         <br><br>
         </div>
 
+    </div>
+
+    <div class="row cm__box cm__box--pricing">
+        <div class="col-12">
+            <div class="text-center">
+                <h2>Pricing</h2>
+                <hr class="hr-content">
+                <h3>How much does LEYLA cost?</h3>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+            <img class="card-img-top" src="" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Free</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+         <div class="col-4">
+            <div class="card">
+            <img class="card-img-top" src="" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Standard</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+         <div class="col-4">
+            <div class="card">
+            <img class="card-img-top" src="" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Premium</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
     </div>
     </div>
 </div><!--end wrapper-->
@@ -175,5 +222,10 @@ export default {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#643adc', endColorstr='#8569db',GradientType=0 ); /* IE6-9 */
     color: #fff;
     height: 90vh;
+}
+
+.teaser__card {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 </style>
