@@ -85,7 +85,7 @@
                 <h3 class="card-title">Backlogs</h3>
                 <h6 class="card-subtitle text-muted">Manage multiple project backlogs.</h6>
             </div>
-            <img class="card-img-top" style="width:100%;" src="/assets/img/frnkn_1.jpg" alt="FRNKN - Manage multiple project backlogs with epics, user stories, acceptance criterias and use cases">
+            <img class="card-img-top" style="width:100%;" :src="image1"  alt="FRNKN - Manage multiple project backlogs with epics, user stories, acceptance criterias and use cases">
 
             <div class="card-block">
                 <p class="card-text">FRNKN lets you manage epics, user stories and non functional requirements in a dramatically easy way.</p>
@@ -98,7 +98,7 @@
                 <h3 class="card-title">Sofware Specs</h3>
                 <h6 class="card-subtitle text-muted">Manage User Stories and more.</h6>
             </div>
-            <img class="card-img-top" style="width:100%;" src="/assets/img/frnkn_2.jpg" alt="Simply manage and create user stories for agile development">
+            <img class="card-img-top" style="width:100%;" :src="image2"  alt="Simply manage and create user stories for agile development">
 
             <div class="card-block">
                 <p class="card-text">Create, update and break down epics and user stories in a super fast and intuitive manner, to save time and costs.</p>
@@ -111,7 +111,7 @@
                 <h3 class="card-title">Collaboration</h3>
                 <h6 class="card-subtitle text-muted">Specs for dev teams.</h6>
             </div>
-            <img class="card-img-top" style="width:100%;" src="/assets/img/frnkn_3.jpg" alt="Software specification for teams. Collaborate with engineers, product owners and stakeholders on user stories and more.">
+            <img class="card-img-top" style="width:100%;" :src="image3"  alt="Software specification for teams. Collaborate with engineers, product owners and stakeholders on user stories and more.">
 
             <div class="card-block">
                 <p class="card-text">Filter, sort and reprioritize backlog items within highly customizable list and grid views. Export backlog items to printable post its.</p>
@@ -162,7 +162,7 @@
         </div>
         <div class="col-4">
             <div class="card">
-            <img class="card-img-top" src="" alt="Card image cap">
+            <img class="card-img-top" :src="image1" /> 
                 <div class="card-body">
                     <h5 class="card-title">Free</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -172,7 +172,7 @@
         </div>
          <div class="col-4">
             <div class="card">
-            <img class="card-img-top" src="" alt="Card image cap">
+            <img class="card-img-top" :src="image2" /> 
                 <div class="card-body">
                     <h5 class="card-title">Standard</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -182,7 +182,7 @@
         </div>
          <div class="col-4">
             <div class="card">
-            <img class="card-img-top" src="" alt="Card image cap">
+            <img class="card-img-top" :src="image3" /> 
                 <div class="card-body">
                     <h5 class="card-title">Premium</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -200,12 +200,25 @@
 <script>
 import Header from './Header'
 import Footer from './Footer'
+import image1 from '../assets/img/frnkn_1.jpg'
+import image2 from '../assets/img/frnkn_2.jpg'
+import image3 from '../assets/img/frnkn_3.jpg'
+
+
+
 
 export default {
   name: 'Home',
   components: {
       Header,
       Footer
+  },
+  data() {
+      return {
+          image1: image1,
+          image2: image2,
+          image3: image3
+      }
   }
 }
 </script>
