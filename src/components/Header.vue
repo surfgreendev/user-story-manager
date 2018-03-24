@@ -1,14 +1,23 @@
 <template>
-    <header class="navbar">
-        <section class="navbar-section">
-            <a href="#" class="navbar-brand mr-2">Layla</a>
-            <a href="#" class="btn btn-link">Docs</a>
-            <a href="https://github.com/picturepan2/spectre" class="btn btn-link">GitHub</a>
-        </section>
-        <section class="navbar-section">
-            <button class="btn btn-link" v-on:click="logout">Logout</button>
-        </section>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            LAYLA
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarHeader">
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item"><a class="nav-link" href="/">Backlogs</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Pricing</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">About</a></li>
+            </ul>
+            <ul class="navbar-nav ">
+                <li class="nav-item"><button class="btn btn-link" v-on:click="logout">Logout</button></li>
+            </ul>
+        </div>
+    </nav>
 </template>
 
 
