@@ -1,16 +1,7 @@
 <template>
 <div class="wrapper">
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-            LAYLA
-        </a>
-        <ul class="nav">
-            <li>Login</li>
-        </ul>
-    </nav>
+    <StandardHeader></StandardHeader>
     <div class="teaser__jumbo jumbotron jumbotron-fluid  ta-start-page-jumbo">
-        
         <div class="container-fluid">
             <!-- As a heading -->
             
@@ -46,7 +37,7 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <ul class="list-inline">
-                        <button class="btn btn-primary">Sign up for free</button>
+                        <router-link class="btn btn-primary" v-bind:to="'SignUp'">Sign up for free</router-link>
                         <button class="btn btn-link">Learn more</button>
                     </ul>
                 </div>
@@ -64,7 +55,6 @@
             We are currently under heavy development. Subscribe now and get notified when we'll have launched our beta programm.
             Subscribers will get a special early bird offer and an exclusive beta account!</p>
             <br>
-            <a href="#email-sub" class="btn btn-danger btn-lg">Sign Up Now</a>
         </div>
         </div>
         </div>
@@ -198,6 +188,7 @@
 
 
 <script>
+import StandardHeader from './StandardHeader'
 import Header from './Header'
 import Footer from './Footer'
 import image1 from '../assets/img/frnkn_1.jpg'
@@ -210,8 +201,8 @@ import image3 from '../assets/img/frnkn_3.jpg'
 export default {
   name: 'Home',
   components: {
-      Header,
-      Footer
+      Footer,
+      StandardHeader
   },
   data() {
       return {

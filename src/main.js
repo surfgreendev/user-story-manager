@@ -8,6 +8,7 @@ import VueMarkDown from 'vue-markdown'
 import firebase from 'firebase'
 import VueFire from 'vuefire'
 import {firebaseApp} from './db'
+import StandardHeader from './components/StandardHeader'
 
 Vue.use(VeeValidate)
 Vue.use(VueMarkDown)
@@ -28,7 +29,7 @@ firebaseApp.auth().onAuthStateChanged(function(user){
     app = new Vue({
       el: '#app',
       router,
-      components: { App, VueMarkDown },
+      components: { App, VueMarkDown, StandardHeader },
       template: '<App/>'
     });
   }
