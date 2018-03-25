@@ -5,6 +5,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
+                       
                         <div v-if="fbError" class="alert alert-danger" role="alert">
                                {{fbErrorMsg}}
                         </div>
@@ -55,31 +56,35 @@
             </div>
         </div>
 
-        <div class="container grid-lg story-list">
-            <div class="columns">
-                <div class="column col-12">
-                    <h1>You have {{this.dbStoriesUserOwnedListing.length}} Stories in your backlog</h1>
-                    <p>{{dbStoriesUserOwnedListing}}</p>
-                    <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceInDown">
-                        <div class="card" v-for="(story, index) in this.dbStoriesUserOwnedListing" :key='index'> 
+        <div class="container story-list">
+            <div class="row">
+                <div class="col-12">
+                    <h2> <i class="fa fa-star"></i> You have {{this.dbStoriesUserOwnedListing.length}} Stories in your backlog</h2>
+                    <!--<p>{{dbStoriesUserOwnedListing}}</p>-->
+                    <transition-group name="list" enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight">
+                        <div class="card story-card" v-for="(story, index) in this.dbStoriesUserOwnedListing" :key='index'> 
                             <div class="card-header">
-                                <div class="card-title h5"><small>id: {{story['.key']}} | votes: {{story.votes}} | points: {{story.storyPoints}} | value: {{story.businessValue}}</small></div>
-                                <div class="card-subtitle text-gray">created by {{story.userName}} on {{new Date(story.created_on)}}</div>
+                                <ul class="list-inline">
+                                    <li><small>id: {{story['.key']}} | votes: {{story.votes}} | points: {{story.storyPoints}} | value: {{story.businessValue}}</small></li>
+                                    <li class="text-right"> <router-link :to="{ name: 'UpdateStory', params: { storyId: story['.key'] }}"><i class="fa fa-pencil"></i></router-link></li>
+                                    <li class="text-right"><i v-on:click="removeStory(story)" class="rm-story fa fa-trash-o"></i></li>
+                                </ul>
                             </div>
                             <div class="card-body">
-                                <p>As a {{story.who}} I'd like to {{story.what}}, so that {{story.why}}</p>
+                                <h3>As a {{story.who}} I'd like to {{story.what}}, so that {{story.why}}</h3>
                                 <p v-if="!story.show_ac"><vue-markdown>{{story.acceptance_criteria}}</vue-markdown></p>
                             </div>
                             <div class="card-footer">
                                 <div class="text-right">
                                     <ul class="list-inline">
-                                        <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-default btn-sm"><i v-if="!story.show_ac" class="icon icon-arrow-up"></i> <i v-if="story.show_ac" class="icon icon-arrow-down"></i>Acceptance Criteria</button></li>
-                                        <li>  <router-link :to="{ name: 'UpdateStory', params: { storyId: story['.key'] }}"><i class="icon icon-edit"></i></router-link></li>
-                                        <li><i v-on:click="removeStory(story)" class="icon icon-delete"></i></li>
+                                        <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-outline-secondary btn-sm"><i v-if="!story.show_ac" class="fa fa-minus"></i> <i v-if="story.show_ac" class="fa fa-plus"></i> Acceptance Criteria</button></li>
+                                        
                                         <li>|</li>
-                                        <li><span v-on:click="voteStory(story['.key'], true)"><i class="icon icon-upward"></i> <small>Upvote</small></span></li>
-                                       <li><span v-on:click="voteStory(story['.key'], false)"><i class="icon icon-downward"></i> <small>Downvote</small></span></li>
+                                        <li><span v-on:click="voteStory(story['.key'], true)"><i class="fa fa-thumbs-up"></i> <small>Upvote</small></span></li>
+                                        <li><span v-on:click="voteStory(story['.key'], false)"><i class="fa fa-thumbs-down"></i> <small>Downvote</small></span></li>
                                     </ul>
+                                    <span class="text-right"><small class="text-muted">created by {{story.userName}} on {{new Date(story.created_on)}}</small></span>
+
                                 </div>
                             </div>
                         </div>
@@ -272,7 +277,6 @@ export default {
 </script>
 
 <style scoped>
-@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css";
 
 .add-story-container {
     background-color: aliceblue;
@@ -283,4 +287,12 @@ export default {
 .story-list {
     margin-top: 20px;
 }
+
+.story-card {
+    margin-bottom: 20px;
+}
+</style>
+
+<style>
+
 </style>
