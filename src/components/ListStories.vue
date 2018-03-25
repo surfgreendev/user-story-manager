@@ -64,11 +64,17 @@
                     <transition-group name="list" enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight">
                         <div class="card story-card" v-for="(story, index) in this.dbStoriesUserOwnedListing" :key='index'> 
                             <div class="card-header">
-                                <ul class="list-inline">
-                                    <li><small>id: {{story['.key']}} | votes: {{story.votes}} | points: {{story.storyPoints}} | value: {{story.businessValue}}</small></li>
-                                    <li class="text-right"> <router-link :to="{ name: 'UpdateStory', params: { storyId: story['.key'] }}"><i class="fa fa-pencil"></i></router-link></li>
-                                    <li class="text-right"><i v-on:click="removeStory(story)" class="rm-story fa fa-trash-o"></i></li>
-                                </ul>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <small>id: {{story['.key']}} | votes: {{story.votes}} | points: {{story.storyPoints}} | value: {{story.businessValue}}</small>
+                                    </div>
+                                    <div class="col-2 text-right">
+                                        <ul class="list-inline">
+                                            <li class="text-right"> <router-link :to="{ name: 'UpdateStory', params: { storyId: story['.key'] }}"><i class="fa fa-pencil"></i></router-link></li>
+                                            <li class="text-right"><i v-on:click="removeStory(story)" class="rm-story fa fa-trash-o"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <h3>As a {{story.who}} I'd like to {{story.what}}, so that {{story.why}}</h3>
