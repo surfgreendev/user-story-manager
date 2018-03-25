@@ -15,17 +15,17 @@
                                 <div class="form-goup col-xs-12 col-md-4">
                                     <label class="col-form-label col-form-label-lg">As a<small>*</small> </label> 
                                     <input class="form-control input-lg" placeholder="Who" name="who" type="text" v-model="storyUserOwned.who" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('who')}" />
-                                    <p v-show="errors.has('who')" class="form-input-hint">{{ errors.first('who') }}</p>
+                                    <p v-show="errors.has('who')" class="badge badge-danger">{{ errors.first('who') }}</p>
                                 </div>
                                 <div class="form-goup col-xs-12 col-md-4">
                                     <label class="col-form-label col-form-label-lg">I'd like to<small>*</small> </label> 
                                     <input class="form-control input-lg" placeholder="What" name="what" type="text" v-model="storyUserOwned.what" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('what')}" />
-                                    <p v-show="errors.has('what')" class="form-input-hint">{{ errors.first('what') }}</p>
+                                    <p v-show="errors.has('what')" class="badge badge-danger">{{ errors.first('what') }}</p>
                                 </div>
                                 <div class="form-goup col-xs-12 col-md-4">
                                     <label class="col-form-label col-form-label-lg">so that<small>*</small> </label> 
                                     <input class="form-control input-lg" placeholder="Why" name="why" type="text" v-model="storyUserOwned.why"  v-validate="'required'" :class="{'input': true, 'is-error': errors.has('why')}">
-                                    <p v-show="errors.has('why')" class="form-input-hint">{{ errors.first('why') }}</p>
+                                    <p v-show="errors.has('why')" class="badge badge-danger">{{ errors.first('why') }}</p>
                                 </div>
                             </div>
                             <div class="form-row">
