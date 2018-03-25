@@ -5,6 +5,11 @@ import UpdateStory from '@/components/UpdateStory'
 import SignUp from '@/components/SignUp'
 import SignIn from '@/components/SignIn'
 import Home from '@/components/Home'
+import ListProject from '@/components/Projects/ListProject'
+import CreateProject from '@/components/Projects/CreateProject'
+import UpdateProject from '@/components/Projects/UpdateProject'
+
+
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -46,6 +51,25 @@ let router = new Router({
       path: '/signin',
       name: 'SignIn',
       component: SignIn
+    },
+    //Projects
+    {
+      path: '/projects/create',
+      name: 'CreateProject',
+      component: CreateProject,
+      props: true,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/projects',
+      name: 'ListProject',
+      component: ListProject,
+      props: true,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
