@@ -1,55 +1,52 @@
 <template>
-    <div class="container update-story-container">
+    <div class="the-root">
         <Header></Header>
-        <h1>fsdaf{{this.storyUserOwned}}</h1>
-        <div class="container grid-lg">
-            <div class="columns">
-                <div class="column col-12">
-                    <h1>Update Your User Story With ID {{ $route.params.storyId }}</h1>
-                    <div v-if="fbError" class="toast toast-error">
-                            {{fbErrorMsg}}
+        <div class="container-fluid edit-story-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Update Your User Story With ID {{ $route.params.storyId }}</h1>
+                        <div v-if="fbError" class="alert alert-danger" role="alert">
+                                {{fbErrorMsg}}
+                        </div>
+                        <form @submit.prevent="updateStory">
+                            
+                            <div class="form-row">
+                                <div class="form-goup col-xs-12 col-md-4">
+                                    <label class="col-form-label col-form-label-lg">As a<small>*</small> </label> 
+                                    <input class="form-control input-lg" placeholder="Who" name="who" type="text" v-model="storyUserOwned.who" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('who')}" />
+                                    <p v-show="errors.has('who')" class="form-input-hint">{{ errors.first('who') }}</p>
+                                </div>
+                                <div class="form-goup col-xs-12 col-md-4">
+                                    <label class="col-form-label col-form-label-lg">I'd like to<small>*</small> </label> 
+                                    <input class="form-control input-lg" placeholder="What" name="what" type="text" v-model="storyUserOwned.what" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('what')}" />
+                                    <p v-show="errors.has('what')" class="form-input-hint">{{ errors.first('what') }}</p>
+                                </div>
+                                <div class="form-goup col-xs-12 col-md-4">
+                                    <label class="col-form-label col-form-label-lg">so that<small>*</small> </label> 
+                                    <input class="form-control input-lg" placeholder="Why" name="why" type="text" v-model="storyUserOwned.why"  v-validate="'required'" :class="{'input': true, 'is-error': errors.has('why')}">
+                                    <p v-show="errors.has('why')" class="form-input-hint">{{ errors.first('why') }}</p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label class="col-form-label-sm">Story Points:</label> 
+                                    <input class="form-control form-control-sm" placeholder="Story Points" name="story_points" type="number" v-model="storyUserOwned.storyPoints">
+                                </div>
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label class="col-form-label-sm">Business Value:</label> 
+                                    <input class="form-control form-control-sm" placeholder="Business Value" name="business_value" type="number" v-model="storyUserOwned.businessValue">
+                                </div>
+                            </div>
+                            <div class="acceptance-criterias-block form-row">
+                                <label class="form-label">Acceptance Criterias: </label>
+                                <textarea class="form-control" rows="10" placeholder="Enter Acceptance Criteria in Markdown here"   v-model="storyUserOwned.acceptance_criteria" name="acceptance_criteria"  />
+                            </div>
+                            <div class="text-right">
+                                <input class="btn btn-primary text-right" type="submit" value="Save User Story" />
+                            </div>
+                        </form>
                     </div>
-                    <!--<UserStoryUpdateForm pwho="TEST WHO" pwhy="TEST WHY" pwhat="mfsanflkdsn" pacceptance_criteria="FDSAFK"></UserStoryUpdateForm>-->
-                    <form @submit.prevent="updateStory">
-                        <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
-                            <p class="alert" v-if="errors.has('who')">{{errors.first('who')}}</p>
-                        </transition>
-                        <div class="columns">
-                        
-                            <div class="column col-xs-12">
-                                <label class="form-label label-lg">As a<small>*</small> </label> 
-                                <input class="form-input input-lg" placeholder="Who" name="who" type="text" v-model="storyUserOwned.who" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('who')}" />
-                                <p v-show="errors.has('who')" class="form-input-hint">{{ errors.first('who') }}</p>
-                            </div>
-                             <div class="column col-xs-12">
-                                <label class="form-label label-lg">I'd like to<small>*</small> </label> 
-                                <input class="form-input input-lg" placeholder="What" name="what" type="text" v-model="storyUserOwned.what" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('what')}" />
-                                <p v-show="errors.has('what')" class="form-input-hint">{{ errors.first('what') }}</p>
-                            </div>
-                            <div class="column col-xs-12">
-                                <label class="form-label label-lg">so that<small>*</small> </label> 
-                                <input class="form-input input-lg" placeholder="Why" name="why" type="text" v-model="storyUserOwned.why"  v-validate="'required'" :class="{'input': true, 'is-error': errors.has('why')}">
-                                <p v-show="errors.has('why')" class="form-input-hint">{{ errors.first('why') }}</p>
-                            </div>
-                        </div>
-                        <div class="columns">
-                            <div class="column col-xs-12">
-                                <label class="form label">Story Points:</label> 
-                                <input class="form-input" placeholder="Story Points" name="story_points" type="number" v-model="storyUserOwned.storyPoints">
-                            </div>
-                            <div class="column col-xs-12">
-                                <label class="form label">Business Value:</label> 
-                                <input class="form-input" placeholder="Business Value" name="business_value" type="number" v-model="storyUserOwned.businessValue">
-                            </div>
-                        </div>
-                        <div class="acceptance-criterias-block form-group">
-                            <label class="form-label">Acceptance Criterias: </label>
-                            <textarea class="form-input" rows="10" placeholder="Enter Acceptance Criteria in Markdown here"   v-model="storyUserOwned.acceptance_criteria" name="acceptance_criteria"  />
-                        </div>
-                        <div class="text-right">
-                            <input class="btn btn-primary text-right" type="submit" value="Save User Story" />
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

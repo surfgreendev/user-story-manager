@@ -230,6 +230,8 @@ export default {
                     this.what = '';
                     this.why = '';
                     this.acceptance_criteria = '';
+                    this.storyPoints = 0;
+                    this.businessValue = 0;
                     
                     // Reset Validation
                     this.$nextTick().then(() => {
