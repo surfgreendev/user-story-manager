@@ -279,7 +279,7 @@ export default {
           else {
               console.log("ERROR USER NOT SIGNED IN")
           }
-      })
+      });
   }
 }
 </script>
