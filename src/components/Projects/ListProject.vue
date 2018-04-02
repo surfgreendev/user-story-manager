@@ -4,6 +4,10 @@
 
 
 <script>
+import firebase from 'firebase'
+import {firebaseApp} from '../../db'
+
+
 export default {
   name: 'ListProject',
   data(){
@@ -11,7 +15,10 @@ export default {
 
       }
   },
-  methods: {}
+  methods: {},
+  beforeCreate: function() {
+    f
+  }
 }
 </script>
 
