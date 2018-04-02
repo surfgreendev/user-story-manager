@@ -53,6 +53,7 @@ let projectRef = db.ref('projects')
 let projectUserOwnedRef = db.ref('projectUserOwned/')
 export default {
   name: 'CreateProject',
+  components: {Header},
   data(){
       return {
           projectName: "",
@@ -93,8 +94,8 @@ export default {
                         this.errors.clear();
                         this.fbError = false
                         this.fbErrorMsg = ''
-
                   })
+                  this.$router.push({path: '/projects'})
               }
               else {
                 console.log("NOT VALID") //@todo: Emit error message in UI from form validation in create form
