@@ -73,7 +73,7 @@
     
     <div class="row">
        
-        <div class="col-xs-12 col-md-4">
+        <div class="card-deck">
             <div class="card text-center">
                 <img class="card-img-top" style="width:100%;" :src="image1"  alt="FRNKN - Manage multiple project backlogs with epics, user stories, acceptance criterias and use cases">
                 <div class="card-body">
@@ -83,8 +83,7 @@
                     <p class="card-text">FRNKN lets you manage epics, user stories and non functional requirements in a dramatically easy way.</p>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
+        
             <div class="card text-center">
                 <img class="card-img-top" style="width:100%;" :src="image2"  alt="Simply manage and create user stories for agile development">
                 <div class="card-body">
@@ -94,8 +93,8 @@
                     <p class="card-text">Create, update and break down epics and user stories in a super fast and intuitive manner, to save time and costs.</p>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
+        
+        
             <div class="card text-center">
                  <img class="card-img-top" style="width:100%;" :src="image3"  alt="Software specification for teams. Collaborate with engineers, product owners and stakeholders on user stories and more.">
                 <div class="card-body">
