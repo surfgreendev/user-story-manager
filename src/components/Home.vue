@@ -133,10 +133,9 @@
     </div>
 
     <div class="container">
-
         <div class="row cm__box cm__box--pricing">
             <div class="col-12">
-                <div class="text-center">
+                <div class="text-center mb-4">
                     <h2>Pricing</h2>
                     <hr class="hr-content">
                     <h3>How much does LEYLA cost?</h3>
@@ -144,31 +143,31 @@
             </div>
             <div class="col-4">
                 <div class="card">
-                    <img class="card-img-top" :src="image1" /> 
+                    <img class="card-img-top" :src="personal_pricing" /> 
                     <div class="card-body">
-                        <h5 class="card-title">Free</h5>
+                        <h5 class="card-title">Personal</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="#" class="btn btn-primary">Try Personal</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card text-white bg-primary">
+                <img class="card-img-top" :src="team_pricing" /> 
+                    <div class="card-body">
+                        <h5 class="card-title">Small Team</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-success">Try Team</a>
                     </div>
                 </div>
             </div>
             <div class="col-4">
                 <div class="card">
-                <img class="card-img-top" :src="image2" /> 
+                <img class="card-img-top" :src="enterprise_pricing" /> 
                     <div class="card-body">
-                        <h5 class="card-title">Standard</h5>
+                        <h5 class="card-title">Enterprise</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card">
-                <img class="card-img-top" :src="image3" /> 
-                    <div class="card-body">
-                        <h5 class="card-title">Premium</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="#" class="btn btn-primary">Contact us</a>
                     </div>
                 </div>
             </div>
@@ -185,7 +184,9 @@ import Footer from './Footer'
 import image1 from '../assets/img/frnkn_1.jpg'
 import image2 from '../assets/img/frnkn_2.jpg'
 import image3 from '../assets/img/frnkn_3.jpg'
-
+import personal_pricing from '../assets/img/personal_pricing.png'
+import team_pricing from '../assets/img/team_pricing.png'
+import enterprise_pricing from '../assets/img/enterprise_pricing.png'
 
 
 
@@ -199,7 +200,10 @@ export default {
       return {
           image1: image1,
           image2: image2,
-          image3: image3
+          image3: image3,
+          personal_pricing: personal_pricing,
+          team_pricing: team_pricing,
+          enterprise_pricing: enterprise_pricing
       }
   }
 }
@@ -281,5 +285,13 @@ height: 75vh;
 
 .dl__faq {
     text-align: left;
+}
+
+.cm__box--pricing {
+    padding: 25px;
+    border: 1px solid #fff;
+    -webkit-box-shadow: 0px 50px 166px -6px rgba(0,0,0,0.16);
+    -moz-box-shadow: 0px 50px 166px -6px rgba(0,0,0,0.16);
+    box-shadow: 0px 50px 166px -6px rgba(0,0,0,0.16);
 }
 </style>
