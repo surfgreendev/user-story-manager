@@ -1,11 +1,14 @@
 <template>
     <div class="the-root">
         <Header></Header>
-        <div class="container-fluid add-story-container">
+        <transition-group name="createForm" enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight">
+        <div class="container-fluid add-story-container" v-if="!showFormInput" :key="33223">
             <div class="container">
                 <div class="row">
+                    <div class="col-12 text-right">
+                        <i v-on:click="toggleFormInput" class="fa fa-times-circle toggle-in-form-icon"></i>
+                    </div>
                     <div class="col-12">
-                       
                         <div v-if="fbError" class="alert alert-danger" role="alert">
                                {{fbErrorMsg}}
                         </div>
@@ -45,21 +48,29 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col text-right">
-                                    <input class="btn btn-primary text-right" type="submit" value="Create User Story" />
+                                <div class="col text-right mt-3">
+                                    <input class="btn btn-success btn-lg text-right" type="submit" value="Create User Story" />
                                 </div>
                             </div>
-                            
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        </transition-group>
 
         <div class="container story-list">
             <div class="row">
                 <div class="col-12">
-                    <h2> <i class="fa fa-star"></i> You have {{this.dbStoriesUserOwnedListing.length}} Stories in your backlog</h2>
+                    <div class="row mb-3">
+                        <div class="col-8 col-xs-12">
+                            <h2> <i class="fa fa-star"></i> You have {{this.dbStoriesUserOwnedListing.length}} Stories in your backlog</h2>
+                        </div>
+                        
+                        <div v-if="showFormInput" class="col-4 col-xs-12 text-right">
+                             <button class="btn btn-success btn-lg" v-on:click="toggleFormInput">Create Story</button>
+                        </div>
+                    </div>
                     <!--<p>{{dbStoriesUserOwnedListing}}</p>-->
                     <transition-group name="list" enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight">
                         <div class="card story-card" v-for="(story, index) in this.dbStoriesUserOwnedListing" :key='index'> 
@@ -86,8 +97,8 @@
                                         <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-outline-secondary btn-sm"><i v-if="!story.show_ac" class="fa fa-minus"></i> <i v-if="story.show_ac" class="fa fa-plus"></i> Acceptance Criteria</button></li>
                                         
                                         <li>|</li>
-                                        <li><span v-on:click="voteStory(story['.key'], true)"><i class="fa fa-thumbs-up"></i> <small>Upvote</small></span></li>
-                                        <li><span v-on:click="voteStory(story['.key'], false)"><i class="fa fa-thumbs-down"></i> <small>Downvote</small></span></li>
+                                        <li><span class="clickable" v-on:click="voteStory(story['.key'], true)"><i class="fa fa-thumbs-up"></i> <small>Upvote</small></span></li>
+                                        <li><span class="clickable" v-on:click="voteStory(story['.key'], false)"><i class="fa fa-thumbs-down"></i> <small>Downvote</small></span></li>
                                     </ul>
                                     <span class="text-right"><small class="text-muted">created by {{story.userName}} on {{new Date(story.created_on)}}</small></span>
 
@@ -155,6 +166,7 @@ export default {
           who: '',
           what: '',
           why: '',
+          showFormInput: true,
           acceptance_criteria: '',
           stories: [
               {who: "Product Manager", what: "do sth", why: "So that ...", acceptance_criteria: "nope", show_ac: "false"},
@@ -269,6 +281,11 @@ export default {
         console.log("AC CLICKED")
         story.show_ac = !story.show_ac;
     },
+    toggleFormInput: function() {
+        console.log("TOGGLE CLICKED")
+        this.showFormInput = !this.showFormInput;
+        console.log(this.showFormInput)
+    }
   },
   beforeCreate: function() {
       firebase.auth().onAuthStateChanged((user) => {
@@ -288,8 +305,8 @@ export default {
 
 .add-story-container {
     background-color: #0070CB;
-    padding-top: 35px;
-    padding-bottom: 35px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .add-story-container label {
@@ -302,6 +319,24 @@ export default {
 
 .story-card {
     margin-bottom: 20px;
+}
+
+.toggle-in-form-icon {
+    color: #fff;
+    font-size: 20px;
+    opacity: 0.7;
+}
+
+.toggle-in-form-icon:hover {
+    cursor: pointer;
+}
+
+.rm-story {
+    cursor: pointer;
+}
+
+.clickable {
+    cursor: pointer;
 }
 </style>
 
