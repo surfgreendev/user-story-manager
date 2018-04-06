@@ -31,5 +31,6 @@ export default {
 <style>
 .logo__leyla {
     color: #0070CB !important;
+    
 }
 </style>

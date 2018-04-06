@@ -223,7 +223,7 @@ export default {
     background: linear-gradient(to bottom, #643adc 0%,#7a59db 50%,#8569db 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#643adc', endColorstr='#8569db',GradientType=0 ); /* IE6-9 */
     color: #fff;
-    height: 75vh;
+    height: 85vh;
 }
 
 .teaser__card {
@@ -233,7 +233,7 @@ export default {
 
 .teaser__jumbo {
 background: #0070CB;
-height: 75vh;
+height: 85vh;
 }
 
 .teaser__jumbo h2 {
