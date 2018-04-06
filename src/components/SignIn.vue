@@ -1,11 +1,11 @@
 <template>
     
-    <div class="signin-container">
+    <div class="signin__container">
         <StandardHeader></StandardHeader>
         
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-xs-12 col-md-7 col-lg-7">
+                <div class="col-xs-12 col-sm-7 col-md-6 col-lg-4">
                     <div class="card signin-card">
                         <div class="card-body">
                             <h1>Sign In</h1>
@@ -75,9 +75,12 @@ export default {
 </script>
 
 <style scoped>
-.signin-container {
+.signin__container {
     
-    background: lightgrey;
+    background: #00c3ff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ffff1c, #00c3ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ffff1c, #00c3ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     
     height: 100vh;
     
@@ -89,7 +92,7 @@ export default {
 }
 
 .signin-card {
-    margin-top:30px
+    margin-top: 100px
 }
 
 

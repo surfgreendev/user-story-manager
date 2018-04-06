@@ -9,7 +9,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                     <h2 class="display-5"><strong>Requirements for Agile Software Projects</strong><hr class="h-teaser-line">Easily Manage Backlogs & User Stories</h2>
+                     <h2 class="display-5">Todo Lists for Agile Software Projects</h2>
+                     <p class="teaser__jumbo--p lead">Easily Manage Backlogs & User Stories</p>
                 </div>
             </div>
             <div class="row">
@@ -37,8 +38,8 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <ul class="list-inline">
-                        <router-link class="btn btn-primary" v-bind:to="'SignUp'">Sign up for free</router-link>
-                        <button class="btn btn-link">Learn more</button>
+                        <router-link class="btn btn-light btn-lg" v-bind:to="'SignUp'">Sign up for free</router-link>
+                        <button class="btn btn-link jumbo__teaser--more-link">Learn more</button>
                     </ul>
                 </div>
             </div>
@@ -46,66 +47,63 @@
     </div>
     <div class="container">
     <div class="row cm__box cm__box--text">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="text-xs-center">
-            <h2>About</h2>
-            <hr class="hr-content">
-            <h3>What is LEYLA?</h3>
-            <p class="lead">LEYLA lets you manage epics, user stories, acceptance criteria and software requirements. Our feature rich project backlogs support your agile development and project management workflow.
-            We are currently under heavy development. Subscribe now and get notified when we'll have launched our beta programm.
-            Subscribers will get a special early bird offer and an exclusive beta account!</p>
-            <br>
-        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"></div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="text-center">
+                <h2 class="display-5">About</h2>
+                <hr class="hr-content">
+                <h3>What is LEYLA?</h3>
+                <p class="lead">LEYLA lets you manage epics, user stories, acceptance criteria and software requirements. Our feature rich project backlogs support your agile development and project management workflow.
+                We are currently under heavy development. Subscribe now and get notified when we'll have launched our beta programm.
+                Subscribers will get a special early bird offer and an exclusive beta account!</p>
+                <br>
+            </div>
+         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"></div>
         </div>
         </div>
     <div class="row cm__box cm__box--features">
         <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="text-xs-center">
-            <br><br>
             <h2>Features</h2>
             <hr class="hr-content">
-            <h3>How LEYLA empowers you to create great user stories and to manage your project backlog</h3>
+            <h3>Create great User Stories and Backlogs</h3>
         </div>
         </div>
     </div>
+    
     <div class="row">
+       
         <div class="col-xs-12 col-md-4">
             <div class="card text-center">
-            <div class="card-block">
-                <h3 class="card-title">Backlogs</h3>
-                <h6 class="card-subtitle text-muted">Manage multiple project backlogs.</h6>
-            </div>
-            <img class="card-img-top" style="width:100%;" :src="image1"  alt="FRNKN - Manage multiple project backlogs with epics, user stories, acceptance criterias and use cases">
-
-            <div class="card-block">
-                <p class="card-text">FRNKN lets you manage epics, user stories and non functional requirements in a dramatically easy way.</p>
-            </div>
+                <img class="card-img-top" style="width:100%;" :src="image1"  alt="FRNKN - Manage multiple project backlogs with epics, user stories, acceptance criterias and use cases">
+                <div class="card-body">
+                    <h5 class="card-title">Backlogs</h5>
+                    <h6 class="card-subtitle text-muted">Manage multiple project backlogs.</h6>
+                    <hr class="hr-content">
+                    <p class="card-text">FRNKN lets you manage epics, user stories and non functional requirements in a dramatically easy way.</p>
+                </div>
             </div>
         </div>
         <div class="col-xs-12 col-md-4">
             <div class="card text-center">
-            <div class="card-block">
-                <h3 class="card-title">Sofware Specs</h3>
-                <h6 class="card-subtitle text-muted">Manage User Stories and more.</h6>
-            </div>
-            <img class="card-img-top" style="width:100%;" :src="image2"  alt="Simply manage and create user stories for agile development">
-
-            <div class="card-block">
-                <p class="card-text">Create, update and break down epics and user stories in a super fast and intuitive manner, to save time and costs.</p>
-            </div>
+                <img class="card-img-top" style="width:100%;" :src="image2"  alt="Simply manage and create user stories for agile development">
+                <div class="card-body">
+                    <h5 class="card-title">Sofware Specs</h5>
+                    <h6 class="card-subtitle text-muted">Manage User Stories and more.</h6>
+                    <hr class="hr-content">
+                    <p class="card-text">Create, update and break down epics and user stories in a super fast and intuitive manner, to save time and costs.</p>
+                </div>
             </div>
         </div>
         <div class="col-xs-12 col-md-4">
             <div class="card text-center">
-            <div class="card-block">
-                <h3 class="card-title">Collaboration</h3>
-                <h6 class="card-subtitle text-muted">Specs for dev teams.</h6>
-            </div>
-            <img class="card-img-top" style="width:100%;" :src="image3"  alt="Software specification for teams. Collaborate with engineers, product owners and stakeholders on user stories and more.">
-
-            <div class="card-block">
-                <p class="card-text">Filter, sort and reprioritize backlog items within highly customizable list and grid views. Export backlog items to printable post its.</p>
-            </div>
+                 <img class="card-img-top" style="width:100%;" :src="image3"  alt="Software specification for teams. Collaborate with engineers, product owners and stakeholders on user stories and more.">
+                <div class="card-body">
+                    <h5 class="card-title">Collaboration</h5>
+                    <h6 class="card-subtitle text-muted">Specs for dev teams.</h6>
+                    <hr class="hr-content">
+                    <p class="card-text">Filter, sort and reprioritize backlog items within highly customizable lists. Export backlog items to printable post its.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -152,7 +150,7 @@
         </div>
         <div class="col-4">
             <div class="card">
-            <img class="card-img-top" :src="image1" /> 
+                <img class="card-img-top" :src="image1" /> 
                 <div class="card-body">
                     <h5 class="card-title">Free</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -219,17 +217,54 @@ export default {
 
 
 .home__teaser {
+    
+/*font-family: 'Open Sans', sans-serif;*/
     background: #643adc; /* Old browsers */
     background: -moz-linear-gradient(top, #643adc 0%, #7a59db 50%, #8569db 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, #643adc 0%,#7a59db 50%,#8569db 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, #643adc 0%,#7a59db 50%,#8569db 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#643adc', endColorstr='#8569db',GradientType=0 ); /* IE6-9 */
     color: #fff;
-    height: 90vh;
+    height: 75vh;
 }
 
 .teaser__card {
     margin-top: 1rem;
     margin-bottom: 2rem;
+}
+
+.teaser__jumbo {
+background: #0070CB;
+height: 75vh;
+}
+
+.teaser__jumbo h2 {
+    font-size: 4rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+}
+
+.teaser__jumbo--p {
+    color: white;
+}
+
+.cm__box {
+    text-align: center;
+}
+
+.cm__box--features {
+    margin-bottom: 20px;
+}
+
+.jumbo__teaser--more-link {
+    color: white;
+}
+
+.hr-content {
+    width: 15%;
+    height: 5px;
+    background-color: #0070CB;
+    color: #0070CB;
 }
 </style>

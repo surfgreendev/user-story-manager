@@ -2,17 +2,21 @@
   <div class="the-root">
     <Header></Header>
     <div class="container list__projects">
-      You have {{this.dbProjectUserOwnedListing.length}}
+     
       <div class="row">
-        
+        <div class="col-12">
+          <h2>
+           You have {{this.dbProjectUserOwnedListing.length}} Projects </h2>
+        </div>
         <div class="col-sm-12 col-md-4" v-for="(project, index) in this.dbProjectUserOwnedListing" :key='index'>
           <div class="card project__item">
             <div class="card-body">
               <h5 class="card-title">{{ project.projectName }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">Created by ... on ...</h6>
               <p class="card-text">{{ project.projectDescription }}</p>
-              <a href="#" class="card-link">View Stories</a>
-              <a href="#" class="card-link">Update Project</a>
+              <a href="#" class="btn btn-sm btn-primary">View Stories</a>
+              <span> | </span>
+              <a href="#" class="card-link"><small>Update Project</small></a>
             </div>
           </div>
         </div>
