@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <ul class="list-inline">
-                        <router-link class="btn btn-light btn-lg" v-bind:to="'SignUp'">Sign up for free</router-link>
+                        <router-link class="btn btn-light btn-lg" v-bind:to="'SignUp'">Register Now</router-link>
                         <button class="btn btn-link jumbo__teaser--more-link">Learn more</button>
                     </ul>
                 </div>
@@ -173,6 +173,7 @@
             </div>
         </div>
     </div>
+    <Footer/>
 </div><!--end wrapper-->  
 </template>
 

@@ -1,8 +1,8 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-            LEYLA
+        <a class="navbar-brand logo__leyla" href="#">
+            <!--<img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">-->
+            <strong>LEYLA</strong>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarStandardHeader" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,3 +27,9 @@ export default {
   name: 'StandardHeader',
 }
 </script>
+
+<style>
+.logo__leyla {
+    color: #0070CB !important;
+}
+</style>
