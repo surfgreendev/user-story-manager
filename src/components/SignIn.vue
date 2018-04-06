@@ -18,12 +18,12 @@
                                     <div class="form-group">
                                         <label class="form-label" for="signup_email">E-Mail:</label>
                                         <input class="form-control form-control-lg" type="email" id="signup_email" name="email" v-model="email" v-validate="'required|email'" placeholder="E-Mail" :class="{'input': true, 'is-error': errors.has('email')}">
-                                        <p v-show="errors.has('email')" class="form-input-hint">{{ errors.first('email') }}</p>
+                                        <p v-show="errors.has('email')" class="form-input-hint text-danger">{{ errors.first('email') }}</p>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="signup_pw">Password:</label>
                                         <input class="form-control form-control-lg" type="password" id="signup_pw" name="password" v-model="pw" v-validate="'required'" placeholder="Enter Password" :class="{'input': true, 'is-error': errors.has('password')}">
-                                        <p v-show="errors.has('password')" class="form-input-hint">{{ errors.first('password') }}</p>
+                                        <p v-show="errors.has('password')" class="form-input-hint text-danger">{{ errors.first('password') }}</p>
 
                                         <input class="signup-btn btn btn-lg btn-primary btn-block" type="submit" value="Sign In">
                                     </div>

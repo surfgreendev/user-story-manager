@@ -287,9 +287,13 @@ export default {
 <style scoped>
 
 .add-story-container {
-    background-color: aliceblue;
+    background-color: #0070CB;
     padding-top: 35px;
     padding-bottom: 35px;
+}
+
+.add-story-container label {
+    color: #fff;
 }
 
 .story-list {
