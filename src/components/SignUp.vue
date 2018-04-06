@@ -2,13 +2,13 @@
     <div class="signup-container">
         <StandardHeader></StandardHeader>
         <div class="container-fluid">
-            <div class="sigup__full">
+            <div class="signup__full">
                 <div class="row justify-content-center">
                     <div class="col-xs-12 col-sm-7 col-md-8 col-lg-6">
                         <div class="card signup-card">
                             <div class="card-body">
                                 <h1>Sign Up</h1>
-                                <div v-if="fbError" class="toast toast-error">
+                                <div v-if="fbError" class="alert alert-danger">
                                     {{fbErrorMsg}}
                                 </div>
 
@@ -16,17 +16,17 @@
                                     <div class="form-group">
                                         <label class="form-label label-lg" for="display_name">Name:</label>
                                         <input class="form-control form-control-lg" name="displayname" type="text" id="display_name" v-model="displayname" v-validate="'required|min:4'" placeholder="Your Name" :class="{'input': true, 'is-error': errors.has('displayname')}">
-                                        <p v-show="errors.has('displayname')" class="form-input-hint">{{ errors.first('displayname') }}</p>
+                                        <p v-show="errors.has('displayname')" class="form-input-hint text-danger">{{ errors.first('displayname') }}</p>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label label-lg" for="signup_email">E-Mail:</label>
                                         <input class="form-control form-control-lg" name="email" type="text" id="signup_email" v-model="email" v-validate="'required|email'" placeholder="E-Mail" :class="{'input': true, 'is-error': errors.has('email')}">
-                                        <p v-show="errors.has('email')" class="form-input-hint">{{ errors.first('email') }}</p>
+                                        <p v-show="errors.has('email')" class="form-input-hint text-danger">{{ errors.first('email') }}</p>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label label-lg" for="signup_pw">Password:</label>
                                         <input class="form-control form-control-lg" name="password" type="password" id="signup_pw" v-model="pw" v-validate="'required|min:6'" placeholder="Enter Password" :class="{'input': true, 'is-error': errors.has('password')}">
-                                        <p v-show="errors.has('password')" class="form-input-hint">{{ errors.first('password') }}</p>
+                                        <p v-show="errors.has('password')" class="form-input-hint text-danger">{{ errors.first('password') }}</p>
                                     </div>
                                     
                                         <input class="signup-btn btn btn-lg btn-primary btn-block" type="submit" value="Sign Up">
@@ -40,6 +40,7 @@
                 </div>
             </div>
         </div>
+         <Footer/>
     </div>
 </template>
 
@@ -113,12 +114,23 @@ export default {
 <style scoped>
 .signup-container {
     
-    background: lightgrey;
+    background-color: #0070CB;
     
 }
 
 .signup-btn {
     margin-top: 15px;
+}
+
+.signup-card {
+    margin-top: 80px;
+    -webkit-box-shadow: 0px 50px 166px -6px rgba(0,0,0,0.16);
+    -moz-box-shadow: 0px 50px 166px -6px rgba(0,0,0,0.16);
+    box-shadow: 0px 50px 166px -6px rgba(0,0,0,0.16);
+}
+
+.signup__full {
+    height: 100vh;
 }
 </style>
 
