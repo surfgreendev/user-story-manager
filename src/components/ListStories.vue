@@ -375,6 +375,7 @@ export default {
 
 .editable__item:hover {
     background-color: #0070CB;
+    opacity: 0.9;
 }
 </style>
 
