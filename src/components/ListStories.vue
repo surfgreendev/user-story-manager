@@ -7,7 +7,7 @@
                 <div class="row">
                     <transition name="createSuccess" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <div v-if="createSuccess" :key="createSuccessKey" class="alert alert-success alert-dismissible fade show success__message" role="alert">
-                            <strong>Success!</strong> You're story with Id <a href="#">{{ lastCreatedStory.storyId }}</a> has been created successfully!
+                            <strong>Success!</strong> You're story has been created successfully!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
