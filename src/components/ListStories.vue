@@ -52,7 +52,7 @@
                             <div class="acceptance-criterias-block form-row">
                                 <div class="col">
                                     <label class="form-label">Acceptance Criterias: </label>
-                                    <textarea class="form-control" rows="10" placeholder="Enter Acceptance Criteria in Markdown here" name="acceptance_criteria" v-model="acceptance_criteria" />
+                                    <textarea class="form-control" rows="7" placeholder="Enter Acceptance Criteria in Markdown here" name="acceptance_criteria" v-model="acceptance_criteria" />
                                 </div>
                             </div>
                             <div class="row">
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h3>As a {{story.who}} I'd like to {{story.what}}, so that {{story.why}}</h3>
+                                <h3>As a <span class="editable__item">{{story.who}}</span> I'd like to <span class="editable__item">{{story.what}}</span>, so that <span class="editable__item">{{story.why}}</span></h3>
                                 <p v-if="!story.show_ac"><vue-markdown>{{story.acceptance_criteria}}</vue-markdown></p>
                             </div>
                             <div class="card-footer">
@@ -367,6 +367,14 @@ export default {
     top: 25px;
     width: 45%;
     right: 20px;
+}
+
+.editable__item {
+    border-bottom: 1px dotted #0070CB;
+}
+
+.editable__item:hover {
+    background-color: #0070CB;
 }
 </style>
 
