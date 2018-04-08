@@ -5,6 +5,14 @@
         <div class="container-fluid add-story-container" v-if="!showFormInput" :key="33223">
             <div class="container">
                 <div class="row">
+                    <transition name="createSuccess" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                        <div v-if="createSuccess" :key="createSuccessKey" class="alert alert-success alert-dismissible fade show success__message" role="alert">
+                            <strong>Success!</strong> You're story with Id <a href="#">{{ lastCreatedStory.storyId }}</a> has been created successfully!
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </transition>
                     <div class="col-12 text-right">
                         <i v-on:click="toggleFormInput" class="fa fa-times-circle toggle-in-form-icon"></i>
                     </div>
@@ -179,7 +187,9 @@ export default {
           fbError: false,
           fbErrorMsg: '',
           businessValue: 0,
-          storyPoints: 0
+          storyPoints: 0,
+          createSuccess: false,
+          lastCreatedStory: {}
       }
   },
   methods: {
@@ -246,6 +256,11 @@ export default {
                     let uid_child_new_story_child = uid_child.child(newStoryRef.key)
                     uid_child_new_story_child.set(story)
                     
+                    this.lastCreatedStory = {
+                        story: story,
+                        storyId: uid_child_new_story_child
+                    }
+
                     // Clean up the forms
                     this.who = '';
                     this.what = '';
@@ -260,8 +275,13 @@ export default {
                         this.errors.clear();
                         this.fbError = false
                         this.fbErrorMsg = ''
+                    });
 
-                    })
+                    this.createSuccess = true;
+
+                    setTimeout(() => {
+                        this.createSuccess = false
+                    }, 4000);
                     
               } else {
                     console.log("NOT VALID") //@todo: Emit error message in UI from form validation in create form
@@ -340,6 +360,13 @@ export default {
 
 .clickable {
     cursor: pointer;
+}
+
+.success__message {
+    position: absolute;
+    top: 25px;
+    width: 45%;
+    right: 20px;
 }
 </style>
 
