@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h3>As a <span class="editable__item">{{story.who}}</span> I'd like to <span class="editable__item">{{story.what}}</span>, so that <span class="editable__item">{{story.why}}</span></h3>
+                                <h3>As a <span v-show="!story.whoEditMode" v-on:click="toogleInlineEdit(story)" class="editable__item">{{story.who}}</span> <input type="text" v-model="story.who" v-show="story.whoEditMode" v-on:blur="saveWho(story)"> I'd like to <span class="editable__item">{{story.what}}</span>, so that <span class="editable__item">{{story.why}}</span></h3>
                                 <p v-if="!story.show_ac"><vue-markdown>{{story.acceptance_criteria}}</vue-markdown></p>
                             </div>
                             <div class="card-footer">
@@ -241,6 +241,9 @@ export default {
                             storyPoints: this.storyPoints,
                             hasUpVoted: false,
                             hasDownVoted: false,
+                            whoEditMode: false,
+                            whatEditMode: false,
+                            whyEditMode: false,
                             created_on: the_date,
                             updated_on: the_date
                     }
@@ -308,6 +311,14 @@ export default {
         console.log("TOGGLE CLICKED")
         this.showFormInput = !this.showFormInput;
         console.log(this.showFormInput)
+    },
+    toogleInlineEdit: function(story) {
+        story.whoEditMode = !story.whoEditMode
+        console.log("INLINEEDIT TOGGLED", story)
+    },
+    saveWho: function(story) {
+        console.log("SAVE WHO", story.who)
+        story.whoEditMode = !story.whoEditMode;
     }
   },
   beforeCreate: function() {
