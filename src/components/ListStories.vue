@@ -96,7 +96,13 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h3>As a <span v-show="!story.whoEditMode" v-on:click="toogleInlineEdit(story)" class="editable__item">{{story.who}}</span> <input type="text" v-model="story.who" v-show="story.whoEditMode" v-on:blur="saveWho(story)"> I'd like to <span class="editable__item">{{story.what}}</span>, so that <span class="editable__item">{{story.why}}</span></h3>
+                                <h3>
+                                    As a <span v-show="!story.whoEditMode" v-on:click="toogleInlineEdit(story, 'who')" class="editable__item">{{story.who}}</span> 
+                                    <input type="text" v-model="story.who" v-show="story.whoEditMode" v-on:blur="saveWho(story, 'who')"> 
+                                    I'd like to <span v-show="!story.whatEditMode" v-on:click="toogleInlineEdit(story, 'what')" class="editable__item">{{story.what}}</span> 
+                                    <input type="text" v-model="story.what" v-show="story.whatEditMode" v-on:blur="saveWho(story, 'what')"> 
+                                    so that <span v-show="!story.whyEditMode" v-on:click="toogleInlineEdit(story, 'why')" class="editable__item">{{story.why}}</span></h3>
+                                    <input type="text" v-model="story.why" v-show="story.whyEditMode" v-on:blur="saveWho(story, 'why')"> 
                                 <p v-if="!story.show_ac"><vue-markdown>{{story.acceptance_criteria}}</vue-markdown></p>
                             </div>
                             <div class="card-footer">
@@ -312,13 +318,31 @@ export default {
         this.showFormInput = !this.showFormInput;
         console.log(this.showFormInput)
     },
-    toogleInlineEdit: function(story) {
-        story.whoEditMode = !story.whoEditMode
-        console.log("INLINEEDIT TOGGLED", story)
+    toogleInlineEdit: function(story, scope) {
+        if (scope === 'who'){
+            story.whoEditMode = !story.whoEditMode
+            console.log("INLINEEDIT TOGGLED", story)
+        } else if (scope === 'what') {
+            story.whatEditMode = !story.whatEditMode
+            console.log("INLINEEDIT TOGGLED WHAT", story)
+        } else {
+            story.whyEditMode = !story.whyEditMode
+            console.log("INLINEEDIT TOGGLED WHY", story)
+        }
+            
     },
-    saveWho: function(story) {
-        console.log("SAVE WHO", story.who)
-        story.whoEditMode = !story.whoEditMode;
+    saveWho: function(story, scope) {
+        if (scope === 'who') {
+            console.log("SAVE WHO", story.who)
+            story.whoEditMode = !story.whoEditMode;
+        } else if (scope === 'what') {
+            console.log("SAVE WHat", story.what)
+            story.whatEditMode = !story.whatEditMode;
+        } else {
+            console.log("SAVE WHyt", story.why)
+            story.whyEditMode = !story.whyEditMode;
+        }
+        
     }
   },
   beforeCreate: function() {
