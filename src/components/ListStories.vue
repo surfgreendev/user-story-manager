@@ -97,12 +97,13 @@
                             </div>
                             <div class="card-body">
                                 <h3>
-                                    As a <span v-show="!story.whoEditMode" v-on:click="toogleInlineEdit(story, 'who')" class="editable__item">{{story.who}}</span> 
-                                    <input type="text" v-model="story.who" v-show="story.whoEditMode" v-on:blur="saveWho(story, 'who')"> 
-                                    I'd like to <span v-show="!story.whatEditMode" v-on:click="toogleInlineEdit(story, 'what')" class="editable__item">{{story.what}}</span> 
-                                    <input type="text" v-model="story.what" v-show="story.whatEditMode" v-on:blur="saveWho(story, 'what')"> 
-                                    so that <span v-show="!story.whyEditMode" v-on:click="toogleInlineEdit(story, 'why')" class="editable__item">{{story.why}}</span></h3>
-                                    <input type="text" v-model="story.why" v-show="story.whyEditMode" v-on:blur="saveWho(story, 'why')"> 
+                                    As a <span v-show="!story.whoEditMode" v-on:click="toogleInlineEdit(story, 'who', index)" class="editable__item">{{story.who}}</span> 
+                                    <input ref='who_edit' type="text" v-model="story.who" v-show="story.whoEditMode" v-on:blur="saveWho(story, 'who')"> 
+                                    I'd like to <span v-show="!story.whatEditMode" v-on:click="toogleInlineEdit(story, 'what', index)" class="editable__item">{{story.what}}</span> 
+                                    <input ref='what_edit' type="text" v-model="story.what" v-show="story.whatEditMode" v-on:blur="saveWho(story, 'what')"> 
+                                    so that <span v-show="!story.whyEditMode" v-on:click="toogleInlineEdit(story, 'why', index)" class="editable__item">{{story.why}}</span>
+                                    <input ref='why_edit' type="text" v-model="story.why" v-show="story.whyEditMode" v-on:blur="saveWho(story, 'why')"> 
+                                </h3>
                                 <p v-if="!story.show_ac"><vue-markdown>{{story.acceptance_criteria}}</vue-markdown></p>
                             </div>
                             <div class="card-footer">
@@ -318,15 +319,18 @@ export default {
         this.showFormInput = !this.showFormInput;
         console.log(this.showFormInput)
     },
-    toogleInlineEdit: function(story, scope) {
+    toogleInlineEdit: function(story, scope, idx) {
         if (scope === 'who'){
             story.whoEditMode = !story.whoEditMode
+            this.$nextTick(() => this.$refs.who_edit[idx].focus());
             console.log("INLINEEDIT TOGGLED", story)
         } else if (scope === 'what') {
             story.whatEditMode = !story.whatEditMode
+            this.$nextTick(() => this.$refs.what_edit[idx].focus());
             console.log("INLINEEDIT TOGGLED WHAT", story)
         } else {
             story.whyEditMode = !story.whyEditMode
+            this.$nextTick(() => this.$refs.why_edit[idx].focus());
             console.log("INLINEEDIT TOGGLED WHY", story)
         }
             
