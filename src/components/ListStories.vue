@@ -336,22 +336,22 @@ export default {
     },
     saveWho: function(story, scope) {
         let theKey = story['.key'];
-        let updatedStory = story;
-        delete updatedStory['.key'];
-
+        
         if (scope === 'who') {
             console.log("SAVE WHO", story.who)
             story.whoEditMode = !story.whoEditMode;
-            console.log("KEY", story['.key'])
-            storiesUserOwnedRef.child(this.user.uid).child(theKey).update(updatedStory);
+            console.log("KEY", theKey);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('who').set(story.who);
         } else if (scope === 'what') {
             console.log("SAVE WHat", story.what)
             story.whatEditMode = !story.whatEditMode;
-            storiesUserOwnedRef.child(this.user.uid).child(theKey).update(updatedStory);
+            console.log("KEY", theKey);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('what').set(story.what);
         } else {
             console.log("SAVE WHyt", story.why)
             story.whyEditMode = !story.whyEditMode;
-            storiesUserOwnedRef.child(this.user.uid).child(theKey).update(updatedStory);
+            console.log("KEY", theKey);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('why').set(story.why);
         }
         
     }
