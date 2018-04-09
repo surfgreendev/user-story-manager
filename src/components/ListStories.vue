@@ -323,14 +323,17 @@ export default {
         if (scope === 'who'){
             story.whoEditMode = !story.whoEditMode
             this.$nextTick(() => this.$refs.who_edit[idx].focus());
+            this.$nextTick(() => this.$refs.who_edit[idx].select());
             console.log("INLINEEDIT TOGGLED", story)
         } else if (scope === 'what') {
             story.whatEditMode = !story.whatEditMode
             this.$nextTick(() => this.$refs.what_edit[idx].focus());
+            this.$nextTick(() => this.$refs.what_edit[idx].select());
             console.log("INLINEEDIT TOGGLED WHAT", story)
         } else {
             story.whyEditMode = !story.whyEditMode
             this.$nextTick(() => this.$refs.why_edit[idx].focus());
+            this.$nextTick(() => this.$refs.why_edit[idx].select());
             console.log("INLINEEDIT TOGGLED WHY", story)
         }
             
