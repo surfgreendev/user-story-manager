@@ -25,34 +25,38 @@
                             <div class="form-row">
                                 <div class="form-goup col-xs-12 col-md-4">                   
                                         <label class="col-form-label col-form-label-lg">As a<small>*</small> </label> 
-                                        <input class="form-control input-lg" placeholder="Who" name="who" type="text" v-model="who" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('who')}" />
+                                        <input class="form-control form-control-lg" placeholder="Who" name="who" type="text" v-model="who" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('who')}" />
                                         <p v-show="errors.has('who')" class="badge badge-danger">{{ errors.first('who') }}</p>                                  
                                 </div>
                                 <div class="form-goup col-xs-12 col-md-4">                   
                                         <label class="col-form-label col-form-label-lg">I'd like to<small>*</small> </label> 
-                                        <input class="form-control input-lg" placeholder="What" name="what" type="text" v-model="what" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('what')}" />
+                                        <input class="form-control form-control-lg" placeholder="What" name="what" type="text" v-model="what" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('what')}" />
                                         <p v-show="errors.has('what')" class="badge badge-danger">{{ errors.first('what') }}</p>                                  
                                 </div>
                                 <div class="form-group col-xs-12 col-md-4">
                                         <label class="col-form-label col-form-label-lg">so that<small>*</small> </label> 
-                                        <input class="form-control input-lg" placeholder="Why" name="why" type="text" v-model="why"  v-validate="'required'" :class="{'input': true, 'is-error': errors.has('why')}">
+                                        <input class="form-control form-control-lg" placeholder="Why" name="why" type="text" v-model="why"  v-validate="'required'" :class="{'input': true, 'is-error': errors.has('why')}">
                                         <p v-show="errors.has('why')" class="badge badge-danger">{{ errors.first('why') }}</p>
                                 </div>
                             </div>
+                            <div class="acceptance-criterias-block form-row">
+                                <div class="form-group col">
+                                    <label class="col-form-label-sm">Acceptance Criterias:</label>
+                                    <textarea class="form-control form-control-sm" rows="7" placeholder="Enter Acceptance Criteria in Markdown here" name="acceptance_criteria" v-model="acceptance_criteria" />
+                                </div>
+                            </div>
                             <div class="form-row">
-                                <div class="form-group col-xs-12 col-md-6">
+                                <div class="form-group col-xs-12 col-md-3">
                                     <label class="col-form-label-sm">Story Points:</label> 
                                     <input class="form-control form-control-sm" placeholder="Story Points" name="story_points" type="number" v-model="storyPoints">
                                 </div>
-                                <div class="form-group col-xs-12 col-md-6">
+                                <div class="form-group col-xs-12 col-md-3">
                                     <label class="col-form-label-sm">Business Value:</label> 
                                     <input class="form-control form-control-sm" placeholder="Business Value" name="business_value" type="number" v-model="businessValue">
                                 </div>
-                            </div>
-                            <div class="acceptance-criterias-block form-row">
-                                <div class="col">
-                                    <label class="form-label">Acceptance Criterias: </label>
-                                    <textarea class="form-control" rows="7" placeholder="Enter Acceptance Criteria in Markdown here" name="acceptance_criteria" v-model="acceptance_criteria" />
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label class="col-form-label-sm">Tags:</label> 
+                                    <input class="form-control form-control-sm" placeholder="Tags" name="tags" v-model="tagsString">
                                 </div>
                             </div>
                             <div class="row">
@@ -196,6 +200,8 @@ export default {
           fbErrorMsg: '',
           businessValue: 0,
           storyPoints: 0,
+          tagsString: "",
+          tagsArr: [],
           createSuccess: false,
           lastCreatedStory: {}
       }
@@ -394,7 +400,7 @@ export default {
 
 .add-story-container {
     background-color: #0070CB;
-    padding-top: 30px;
+    padding-top: 2px;
     padding-bottom: 30px;
 }
 
