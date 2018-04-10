@@ -8,7 +8,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarHeader">
             <ul class="navbar-nav mr-auto ">
-                <li class="nav-item"><a class="nav-link" href="/">Backlogs</a></li>
+                <li class="nav-item"><router-link class="nav-link" to="backlogs">Backlogs</router-link></li>
                 <li class="nav-item"><a class="nav-link" href="/">Pricing</a></li>
                 <li class="nav-item"><a class="nav-link" href="/">About</a></li>
             </ul>
