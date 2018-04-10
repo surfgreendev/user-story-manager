@@ -96,7 +96,15 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h3>As a <span class="editable__item">{{story.who}}</span> I'd like to <span class="editable__item">{{story.what}}</span>, so that <span class="editable__item">{{story.why}}</span></h3>
+                                <h3>
+                                    As a <span v-show="!story.whoEditMode" v-on:click="toogleInlineEdit(story, 'who', index)" class="editable__item">{{story.who}}</span> 
+                                    <input class="input__inline" ref='who_edit' type="text" v-model="story.who" v-show="story.whoEditMode" v-on:blur="saveWho(story, 'who')"> 
+                                    I'd like to <span v-show="!story.whatEditMode" v-on:click="toogleInlineEdit(story, 'what', index)" class="editable__item">{{story.what}}</span> 
+                                    <input class="input__inline" ref='what_edit' type="text" v-model="story.what" v-show="story.whatEditMode" v-on:blur="saveWho(story, 'what')"> 
+                                    so that <span v-show="!story.whyEditMode" v-on:click="toogleInlineEdit(story, 'why', index)" class="editable__item">{{story.why}}</span>
+                                    <input class="input__inline" ref='why_edit' type="text" v-model="story.why" v-show="story.whyEditMode" v-on:blur="saveWho(story, 'why')"> 
+                                </h3>
+                                <span v-if="story.inlineUpdateSuccess" class="inline__edit_message--success alert alert-success">Story has been saved!</span>
                                 <p v-if="!story.show_ac"><vue-markdown>{{story.acceptance_criteria}}</vue-markdown></p>
                             </div>
                             <div class="card-footer">
@@ -241,6 +249,10 @@ export default {
                             storyPoints: this.storyPoints,
                             hasUpVoted: false,
                             hasDownVoted: false,
+                            whoEditMode: false,
+                            whatEditMode: false,
+                            whyEditMode: false,
+                            inlineUpdateSuccess: false,
                             created_on: the_date,
                             updated_on: the_date
                     }
@@ -308,6 +320,60 @@ export default {
         console.log("TOGGLE CLICKED")
         this.showFormInput = !this.showFormInput;
         console.log(this.showFormInput)
+    },
+    toogleInlineEdit: function(story, scope, idx) {
+        if (scope === 'who'){
+            story.whoEditMode = !story.whoEditMode
+            this.$nextTick(() => this.$refs.who_edit[idx].focus());
+            this.$nextTick(() => this.$refs.who_edit[idx].select());
+        } else if (scope === 'what') {
+            story.whatEditMode = !story.whatEditMode
+            this.$nextTick(() => this.$refs.what_edit[idx].focus());
+            this.$nextTick(() => this.$refs.what_edit[idx].select());
+        } else {
+            story.whyEditMode = !story.whyEditMode
+            this.$nextTick(() => this.$refs.why_edit[idx].focus());
+            this.$nextTick(() => this.$refs.why_edit[idx].select());
+        }
+    },
+    saveWho: function(story, scope) {
+        let theKey = story['.key'];
+
+        if (scope === 'who') {
+            console.log("SAVE WHO", story.who)
+            story.whoEditMode = !story.whoEditMode;
+            console.log("KEY", theKey);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('who').set(story.who);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(true);
+            
+            setTimeout(() => {
+                storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(false);
+            }, 1500);
+
+        } else if (scope === 'what') {
+            console.log("SAVE WHat", story.what)
+            story.whatEditMode = !story.whatEditMode;
+            console.log("KEY", theKey);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('what').set(story.what);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(true);
+            
+            setTimeout(() => {
+                storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(false);
+            }, 1500);
+
+        } else {
+            console.log("SAVE WHyt", story.why)
+            story.whyEditMode = !story.whyEditMode;
+            console.log("KEY", theKey);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('why').set(story.why);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(true);
+            
+            setTimeout(() => {
+                storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(false);
+            }, 1500);
+
+        }
+        
     }
   },
   beforeCreate: function() {
@@ -376,6 +442,22 @@ export default {
 .editable__item:hover {
     background-color: #0070CB;
     opacity: 0.9;
+}
+
+.input__inline {
+    max-width: 200px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.inline__edit_message--success {
+    max-width: 200px;
+    position: absolute;
+    right: 10px;
+    padding: 5px;
+    top: -21px;
+    font-size: 12px;
+    opacity: 0.8;
 }
 </style>
 
