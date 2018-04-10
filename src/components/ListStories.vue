@@ -104,6 +104,7 @@
                                     so that <span v-show="!story.whyEditMode" v-on:click="toogleInlineEdit(story, 'why', index)" class="editable__item">{{story.why}}</span>
                                     <input class="input__inline" ref='why_edit' type="text" v-model="story.why" v-show="story.whyEditMode" v-on:blur="saveWho(story, 'why')"> 
                                 </h3>
+                                <span v-if="story.inlineUpdateSuccess" class="inline__edit_message--success alert alert-success">Story has been saved!</span>
                                 <p v-if="!story.show_ac"><vue-markdown>{{story.acceptance_criteria}}</vue-markdown></p>
                             </div>
                             <div class="card-footer">
@@ -251,6 +252,7 @@ export default {
                             whoEditMode: false,
                             whatEditMode: false,
                             whyEditMode: false,
+                            inlineUpdateSuccess: false,
                             created_on: the_date,
                             updated_on: the_date
                     }
@@ -336,22 +338,40 @@ export default {
     },
     saveWho: function(story, scope) {
         let theKey = story['.key'];
-        
+
         if (scope === 'who') {
             console.log("SAVE WHO", story.who)
             story.whoEditMode = !story.whoEditMode;
             console.log("KEY", theKey);
             storiesUserOwnedRef.child(this.user.uid).child(theKey).child('who').set(story.who);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(true);
+            
+            setTimeout(() => {
+                storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(false);
+            }, 1500);
+
         } else if (scope === 'what') {
             console.log("SAVE WHat", story.what)
             story.whatEditMode = !story.whatEditMode;
             console.log("KEY", theKey);
             storiesUserOwnedRef.child(this.user.uid).child(theKey).child('what').set(story.what);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(true);
+            
+            setTimeout(() => {
+                storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(false);
+            }, 1500);
+
         } else {
             console.log("SAVE WHyt", story.why)
             story.whyEditMode = !story.whyEditMode;
             console.log("KEY", theKey);
             storiesUserOwnedRef.child(this.user.uid).child(theKey).child('why').set(story.why);
+            storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(true);
+            
+            setTimeout(() => {
+                storiesUserOwnedRef.child(this.user.uid).child(theKey).child('inlineUpdateSuccess').set(false);
+            }, 1500);
+
         }
         
     }
@@ -428,6 +448,16 @@ export default {
     max-width: 200px;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.inline__edit_message--success {
+    max-width: 200px;
+    position: absolute;
+    right: 10px;
+    padding: 5px;
+    top: -21px;
+    font-size: 12px;
+    opacity: 0.8;
 }
 </style>
 
