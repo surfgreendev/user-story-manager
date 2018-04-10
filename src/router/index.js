@@ -44,7 +44,7 @@ let router = new Router({
     },
     {
       path: '/signup',
-      name: 'SignUp', 
+      name: 'SignUp',
       component: SignUp
     },
     {
@@ -54,7 +54,7 @@ let router = new Router({
     },
     //Projects
     {
-      path: '/projects/create',
+      path: '/backlogs/create',
       name: 'CreateProject',
       component: CreateProject,
       props: true,
@@ -63,7 +63,7 @@ let router = new Router({
       }
     },
     {
-      path: '/projects',
+      path: '/backlogs',
       name: 'ListProject',
       component: ListProject,
       props: true,
