@@ -14,6 +14,7 @@
               <h5 class="card-title">{{ project.projectName }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">Created by ... on ...</h6>
               <p class="card-text">{{ project.projectDescription }}</p>
+              <router-link :to="{ name: 'ListStories'}">Go to Backlog</router-link>
               <a href="#" class="btn btn-sm btn-primary">View Stories</a>
               <span> | </span>
               <a href="#" class="card-link"><small>Update Project</small></a>
