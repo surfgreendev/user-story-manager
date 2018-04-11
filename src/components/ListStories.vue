@@ -114,7 +114,7 @@
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-6">
-                                        <span class="text-right"><small class="text-muted">created by {{story.userName}} on {{new Date(story.created_on)}}</small></span>
+                                        <span class="text-right"><small class="text-muted">created by {{story.userName}} {{new Date(story.created_on) | momentSince}}</small></span>
                                     </div>
                                     <div class="col-6">
                                         <ul class="list-inline text-right list-no-margin">
@@ -140,6 +140,7 @@ import VueMarkdown from 'vue-markdown'
 import Header from './Header'
 import firebase from 'firebase'
 import {firebaseApp} from '../db'
+import moment from 'moment'
 
 let db = firebaseApp.database()
 
@@ -361,6 +362,11 @@ export default {
         }
         
     }
+  },
+  filters: {
+      momentSince: function (date) {
+          return moment(date, "YYYYMMDD").fromNow();
+      }
   },
   beforeCreate: function() {
       this.backlogId = this.$route.params.backlogId
