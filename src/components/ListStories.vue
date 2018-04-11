@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row">
                     <transition name="createSuccess" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-                        <div v-if="createSuccess" :key="createSuccessKey" class="alert alert-success alert-dismissible fade show success__message" role="alert">
+                        <div v-if="createSuccess"  class="alert alert-success alert-dismissible fade show success__message" role="alert">
                             <strong>Success!</strong> You're story has been created successfully!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -25,34 +25,38 @@
                             <div class="form-row">
                                 <div class="form-goup col-xs-12 col-md-4">                   
                                         <label class="col-form-label col-form-label-lg">As a<small>*</small> </label> 
-                                        <input class="form-control input-lg" placeholder="Who" name="who" type="text" v-model="who" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('who')}" />
+                                        <input class="form-control form-control-lg" placeholder="Who" name="who" type="text" v-model="who" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('who')}" />
                                         <p v-show="errors.has('who')" class="badge badge-danger">{{ errors.first('who') }}</p>                                  
                                 </div>
                                 <div class="form-goup col-xs-12 col-md-4">                   
                                         <label class="col-form-label col-form-label-lg">I'd like to<small>*</small> </label> 
-                                        <input class="form-control input-lg" placeholder="What" name="what" type="text" v-model="what" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('what')}" />
+                                        <input class="form-control form-control-lg" placeholder="What" name="what" type="text" v-model="what" v-validate="'required'" :class="{'input': true, 'is-error': errors.has('what')}" />
                                         <p v-show="errors.has('what')" class="badge badge-danger">{{ errors.first('what') }}</p>                                  
                                 </div>
                                 <div class="form-group col-xs-12 col-md-4">
                                         <label class="col-form-label col-form-label-lg">so that<small>*</small> </label> 
-                                        <input class="form-control input-lg" placeholder="Why" name="why" type="text" v-model="why"  v-validate="'required'" :class="{'input': true, 'is-error': errors.has('why')}">
+                                        <input class="form-control form-control-lg" placeholder="Why" name="why" type="text" v-model="why"  v-validate="'required'" :class="{'input': true, 'is-error': errors.has('why')}">
                                         <p v-show="errors.has('why')" class="badge badge-danger">{{ errors.first('why') }}</p>
                                 </div>
                             </div>
+                            <div class="acceptance-criterias-block form-row">
+                                <div class="form-group col">
+                                    <label class="col-form-label-sm">Acceptance Criterias:</label>
+                                    <textarea class="form-control form-control-sm" rows="7" placeholder="Enter Acceptance Criteria in Markdown here" name="acceptance_criteria" v-model="acceptance_criteria" />
+                                </div>
+                            </div>
                             <div class="form-row">
-                                <div class="form-group col-xs-12 col-md-6">
+                                <div class="form-group col-xs-12 col-md-3">
                                     <label class="col-form-label-sm">Story Points:</label> 
                                     <input class="form-control form-control-sm" placeholder="Story Points" name="story_points" type="number" v-model="storyPoints">
                                 </div>
-                                <div class="form-group col-xs-12 col-md-6">
+                                <div class="form-group col-xs-12 col-md-3">
                                     <label class="col-form-label-sm">Business Value:</label> 
                                     <input class="form-control form-control-sm" placeholder="Business Value" name="business_value" type="number" v-model="businessValue">
                                 </div>
-                            </div>
-                            <div class="acceptance-criterias-block form-row">
-                                <div class="col">
-                                    <label class="form-label">Acceptance Criterias: </label>
-                                    <textarea class="form-control" rows="7" placeholder="Enter Acceptance Criteria in Markdown here" name="acceptance_criteria" v-model="acceptance_criteria" />
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label class="col-form-label-sm">Tags:</label> 
+                                    <input class="form-control form-control-sm" placeholder="Tags" name="tags" v-model="tagsString">
                                 </div>
                             </div>
                             <div class="row">
@@ -139,32 +143,7 @@ import {firebaseApp} from '../db'
 
 let db = firebaseApp.database()
 
-/** 
-@todo: NEXT 
-* Show Story Count - DONE
-* Save user name when story is added - DONE
-* Show creation date - DONE - BUT DO IT WITH 4 minutes ago, etc.
-* Show the id of the storiy - DONE
-* Update view - Really Update the data - DONE
-* Filter, Search and sort data
-* Do Backlog Grooming View: 
-* @todo: Rearange positions 
-* @todo: Inline Editing
-* Add Tags to stories
-* Make stories exportable as json/csv
 
-* Rating for stories upvote/downvote -> DONE
-* Set UpVote/DownVote per story so that a user can only upvote or downvote once
-* Setup the security roles for the votes as stated here: https://stackoverflow.com/questions/42276881/increment-firebase-value-from-javascript-subject-to-constraint
-
-* Story Points for stories - DONE
-
-* If user id does not exist - block add buttons and icons with v-if
-* Validate Reset with https://github.com/baianat/vee-validate/issues/209 - DONE
-* Cursor Styling for icon links in cards
-*/
-
-// Firebase References
 let storiesRef = db.ref('stories')
 let storiesUserOwnedRef = db.ref('storiesUserOwned/')
 
@@ -176,8 +155,11 @@ export default {
   },
   firebase() {
       const loggedInUserUid = firebase.auth().currentUser.uid
+      console.log("IN FIREBASE", this.backlogId)
       return {
-          dbStoriesUserOwnedListing: db.ref('storiesUserOwned/' + loggedInUserUid),
+          
+          dbStoriesUserOwnedListing: db.ref('storiesUserOwned/' + loggedInUserUid + '/' + this.$route.params.backlogId),
+          //dbStoriesUserOwnedListing: storiesUserOwnedRef.child(loggedInUserUid).child(this.backlogId)
       }
   },
   data() {
@@ -185,6 +167,7 @@ export default {
           who: '',
           what: '',
           why: '',
+          backlogId: null,
           showFormInput: true,
           acceptance_criteria: '',
           stories: [
@@ -196,6 +179,8 @@ export default {
           fbErrorMsg: '',
           businessValue: 0,
           storyPoints: 0,
+          tagsString: "",
+          tagsArr: [],
           createSuccess: false,
           lastCreatedStory: {}
       }
@@ -238,6 +223,7 @@ export default {
                     // create the story object 
                     let story = {
                             userId: _uid,
+                            backlogId: this.backlogId,
                             userName: this.user.displayName,
                             who: this.who, 
                             what: this.what, 
@@ -264,7 +250,7 @@ export default {
                     newStoryRef.set(story)
 
                     // Set up the structure of root/storiesUserOwned/<uid>/<storyuid>/
-                    let uid_child = storiesUserOwnedRef.child(_uid)
+                    let uid_child = storiesUserOwnedRef.child(_uid).child(this.backlogId)
                     let uid_child_new_story_child = uid_child.child(newStoryRef.key)
                     uid_child_new_story_child.set(story)
                     
@@ -377,6 +363,7 @@ export default {
     }
   },
   beforeCreate: function() {
+      this.backlogId = this.$route.params.backlogId
       firebase.auth().onAuthStateChanged((user) => {
           console.log("USER", user)
           if (user) {
@@ -386,6 +373,10 @@ export default {
               console.log("ERROR USER NOT SIGNED IN")
           }
       });
+  },
+  mounted: function() {
+      console.log("BACKLOG ID", this.$route.params.backlogId)
+      this.backlogId = this.$route.params.backlogId
   }
 }
 </script>
@@ -394,7 +385,7 @@ export default {
 
 .add-story-container {
     background-color: #0070CB;
-    padding-top: 30px;
+    padding-top: 2px;
     padding-bottom: 30px;
 }
 
