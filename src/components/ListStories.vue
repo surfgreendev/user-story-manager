@@ -86,7 +86,7 @@
                     <!--<p>{{dbStoriesUserOwnedListing}}</p>-->
                     <transition-group name="list" enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight">
                         <div class="card story-card" v-for="(story, index) in this.dbStoriesUserOwnedListing" :key='index'> 
-                            <div class="card-header">
+                            <div class="card-header card-header--custom">
                                 <div class="row">
                                     <div class="col-10">
                                         <small><span class="badge badge-secondary">id: {{story['.key']}}</span> <span class="badge badge-success">{{story.votes}} Votes</span> <span class="badge badge-light">{{story.storyPoints}} story points </span> <span class="badge badge-light"> {{story.businessValue}} business value</span></small>
@@ -117,7 +117,7 @@
                                         <span class="text-right"><small class="text-muted">created by {{story.userName}} on {{new Date(story.created_on)}}</small></span>
                                     </div>
                                     <div class="col-6">
-                                        <ul class="list-inline text-right">
+                                        <ul class="list-inline text-right list-no-margin">
                                             <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-outline-secondary btn-sm"><i v-if="!story.show_ac" class="fa fa-minus"></i> <i v-if="story.show_ac" class="fa fa-plus"></i> Acceptance Criteria</button></li>
                                             <li>|</li>
                                             <li><span class="clickable" v-on:click="voteStory(story['.key'], true)"><i class="fa fa-thumbs-up"></i> <small>Upvote</small></span></li>
@@ -453,6 +453,10 @@ export default {
 
 .list-no-margin {
     margin-bottom: 0px;
+}
+
+.card-header--custom {
+    padding: .4rem;
 }
 </style>
 
