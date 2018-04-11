@@ -89,10 +89,10 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-10">
-                                        <small>id: {{story['.key']}} | votes: {{story.votes}} | points: {{story.storyPoints}} | value: {{story.businessValue}}</small>
+                                        <small><span class="badge badge-secondary">id: {{story['.key']}}</span> <span class="badge badge-success">{{story.votes}} Votes</span> <span class="badge badge-light">{{story.storyPoints}} story points </span> <span class="badge badge-light"> {{story.businessValue}} business value</span></small>
                                     </div>
                                     <div class="col-2 text-right">
-                                        <ul class="list-inline">
+                                        <ul class="list-inline list-no-margin">
                                             <li class="text-right"> <router-link :to="{ name: 'UpdateStory', params: { storyId: story['.key'] }}"><i class="fa fa-pencil"></i></router-link></li>
                                             <li class="text-right"><i v-on:click="removeStory(story)" class="rm-story fa fa-trash-o"></i></li>
                                         </ul>
@@ -449,6 +449,10 @@ export default {
     top: -21px;
     font-size: 12px;
     opacity: 0.8;
+}
+
+.list-no-margin {
+    margin-bottom: 0px;
 }
 </style>
 
