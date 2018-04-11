@@ -95,7 +95,7 @@ export default {
                       name: user.providerData[0].displayName,
                       email: user.providerData[0].email,
                   })
-                  this.$router.replace('stories')
+                  this.$router.replace('backlogs')
                   
               },
               err => {

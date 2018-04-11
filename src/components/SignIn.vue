@@ -68,7 +68,7 @@ export default {
           firebase.auth().signInWithEmailAndPassword(this.email, this.pw).then(
               user => {
                   console.log("SIGNE IN USER:", user)
-                  this.$router.replace('stories')
+                  this.$router.replace('backlogs')
               },
               err => {
                   console.log("ERROR SIGN IN", err)
