@@ -111,14 +111,14 @@
                                 <span v-if="story.inlineUpdateSuccess" class="inline__edit_message--success alert alert-success">Story has been saved!</span>
                                 <p v-if="!story.show_ac"><vue-markdown>{{story.acceptance_criteria}}</vue-markdown></p>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer card-footer--custom">
                                 <div class="row">
                                     <div class="col-6">
                                         <span class="text-right"><small class="text-muted">created by {{story.userName}} {{new Date(story.created_on) | momentSince}}</small></span>
                                     </div>
                                     <div class="col-6">
                                         <ul class="list-inline text-right list-no-margin">
-                                            <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-outline-secondary btn-sm"><i v-if="!story.show_ac" class="fa fa-minus"></i> <i v-if="story.show_ac" class="fa fa-plus"></i> Acceptance Criteria</button></li>
+                                            <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-outline-secondary btn-sm"><i v-if="!story.show_ac" class="fa fa-minus"></i> <i v-if="story.show_ac" class="fa fa-plus"></i> Details</button></li>
                                             <li>|</li>
                                             <li><span class="clickable" v-on:click="voteStory(story['.key'], true)"><i class="fa fa-thumbs-up"></i> <small>Upvote</small></span></li>
                                             <li><span class="clickable" v-on:click="voteStory(story['.key'], false)"><i class="fa fa-thumbs-down"></i> <small>Downvote</small></span></li>
@@ -462,6 +462,10 @@ export default {
 }
 
 .card-header--custom {
+    padding: .4rem;
+}
+
+.card-footer--custom {
     padding: .4rem;
 }
 </style>
