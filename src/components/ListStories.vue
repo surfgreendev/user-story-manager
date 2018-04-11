@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row">
                     <transition name="createSuccess" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-                        <div v-if="createSuccess" :key="createSuccessKey" class="alert alert-success alert-dismissible fade show success__message" role="alert">
+                        <div v-if="createSuccess"  class="alert alert-success alert-dismissible fade show success__message" role="alert">
                             <strong>Success!</strong> You're story has been created successfully!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -155,8 +155,11 @@ export default {
   },
   firebase() {
       const loggedInUserUid = firebase.auth().currentUser.uid
+      console.log("IN FIREBASE", this.backlogId)
       return {
-          dbStoriesUserOwnedListing: db.ref('storiesUserOwned/' + loggedInUserUid),
+          
+          dbStoriesUserOwnedListing: db.ref('storiesUserOwned/' + loggedInUserUid + '/' + this.$route.params.backlogId),
+          //dbStoriesUserOwnedListing: storiesUserOwnedRef.child(loggedInUserUid).child(this.backlogId)
       }
   },
   data() {
@@ -164,7 +167,7 @@ export default {
           who: '',
           what: '',
           why: '',
-          backlogId: '',
+          backlogId: null,
           showFormInput: true,
           acceptance_criteria: '',
           stories: [
@@ -220,6 +223,7 @@ export default {
                     // create the story object 
                     let story = {
                             userId: _uid,
+                            backlogId: this.backlogId,
                             userName: this.user.displayName,
                             who: this.who, 
                             what: this.what, 
@@ -246,7 +250,7 @@ export default {
                     newStoryRef.set(story)
 
                     // Set up the structure of root/storiesUserOwned/<uid>/<storyuid>/
-                    let uid_child = storiesUserOwnedRef.child(_uid)
+                    let uid_child = storiesUserOwnedRef.child(_uid).child(this.backlogId)
                     let uid_child_new_story_child = uid_child.child(newStoryRef.key)
                     uid_child_new_story_child.set(story)
                     
@@ -359,6 +363,7 @@ export default {
     }
   },
   beforeCreate: function() {
+      this.backlogId = this.$route.params.backlogId
       firebase.auth().onAuthStateChanged((user) => {
           console.log("USER", user)
           if (user) {
