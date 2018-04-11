@@ -86,13 +86,13 @@
                     <!--<p>{{dbStoriesUserOwnedListing}}</p>-->
                     <transition-group name="list" enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight">
                         <div class="card story-card" v-for="(story, index) in this.dbStoriesUserOwnedListing" :key='index'> 
-                            <div class="card-header">
+                            <div class="card-header card-header--custom">
                                 <div class="row">
                                     <div class="col-10">
-                                        <small>id: {{story['.key']}} | votes: {{story.votes}} | points: {{story.storyPoints}} | value: {{story.businessValue}}</small>
+                                        <small><span class="badge badge-secondary">id: {{story['.key']}}</span> <span class="badge badge-success">{{story.votes}} Votes</span> <span class="badge badge-light">{{story.storyPoints}} story points </span> <span class="badge badge-light"> {{story.businessValue}} business value</span></small>
                                     </div>
                                     <div class="col-2 text-right">
-                                        <ul class="list-inline">
+                                        <ul class="list-inline list-no-margin">
                                             <li class="text-right"> <router-link :to="{ name: 'UpdateStory', params: { storyId: story['.key'] }}"><i class="fa fa-pencil"></i></router-link></li>
                                             <li class="text-right"><i v-on:click="removeStory(story)" class="rm-story fa fa-trash-o"></i></li>
                                         </ul>
@@ -111,14 +111,14 @@
                                 <span v-if="story.inlineUpdateSuccess" class="inline__edit_message--success alert alert-success">Story has been saved!</span>
                                 <p v-if="!story.show_ac"><vue-markdown>{{story.acceptance_criteria}}</vue-markdown></p>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer card-footer--custom">
                                 <div class="row">
                                     <div class="col-6">
-                                        <span class="text-right"><small class="text-muted">created by {{story.userName}} on {{new Date(story.created_on)}}</small></span>
+                                        <span class="text-right"><small class="text-muted">created by {{story.userName}} {{new Date(story.created_on) | momentSince}}</small></span>
                                     </div>
                                     <div class="col-6">
-                                        <ul class="list-inline text-right">
-                                            <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-outline-secondary btn-sm"><i v-if="!story.show_ac" class="fa fa-minus"></i> <i v-if="story.show_ac" class="fa fa-plus"></i> Acceptance Criteria</button></li>
+                                        <ul class="list-inline text-right list-no-margin">
+                                            <li><button v-on:click="toggleAcceptanceCriteria(story)" class="btn btn-outline-secondary btn-sm"><i v-if="!story.show_ac" class="fa fa-minus"></i> <i v-if="story.show_ac" class="fa fa-plus"></i> Details</button></li>
                                             <li>|</li>
                                             <li><span class="clickable" v-on:click="voteStory(story['.key'], true)"><i class="fa fa-thumbs-up"></i> <small>Upvote</small></span></li>
                                             <li><span class="clickable" v-on:click="voteStory(story['.key'], false)"><i class="fa fa-thumbs-down"></i> <small>Downvote</small></span></li>
@@ -140,6 +140,7 @@ import VueMarkdown from 'vue-markdown'
 import Header from './Header'
 import firebase from 'firebase'
 import {firebaseApp} from '../db'
+import moment from 'moment'
 
 let db = firebaseApp.database()
 
@@ -362,6 +363,11 @@ export default {
         
     }
   },
+  filters: {
+      momentSince: function (date) {
+          return moment(date, "YYYYMMDD").fromNow();
+      }
+  },
   beforeCreate: function() {
       this.backlogId = this.$route.params.backlogId
       firebase.auth().onAuthStateChanged((user) => {
@@ -449,6 +455,18 @@ export default {
     top: -21px;
     font-size: 12px;
     opacity: 0.8;
+}
+
+.list-no-margin {
+    margin-bottom: 0px;
+}
+
+.card-header--custom {
+    padding: .4rem;
+}
+
+.card-footer--custom {
+    padding: .4rem;
 }
 </style>
 
