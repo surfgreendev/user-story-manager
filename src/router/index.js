@@ -26,9 +26,10 @@ let router = new Router({
       component: Home
     },
     {
-      path: '/stories',
+      path: '/stories/:backlogId',
       name: 'ListStories',
       component: ListStories,
+      props: true,
       meta: {
         requiresAuth: true
       }

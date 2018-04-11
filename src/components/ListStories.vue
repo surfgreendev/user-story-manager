@@ -143,32 +143,7 @@ import {firebaseApp} from '../db'
 
 let db = firebaseApp.database()
 
-/** 
-@todo: NEXT 
-* Show Story Count - DONE
-* Save user name when story is added - DONE
-* Show creation date - DONE - BUT DO IT WITH 4 minutes ago, etc.
-* Show the id of the storiy - DONE
-* Update view - Really Update the data - DONE
-* Filter, Search and sort data
-* Do Backlog Grooming View: 
-* @todo: Rearange positions 
-* @todo: Inline Editing
-* Add Tags to stories
-* Make stories exportable as json/csv
 
-* Rating for stories upvote/downvote -> DONE
-* Set UpVote/DownVote per story so that a user can only upvote or downvote once
-* Setup the security roles for the votes as stated here: https://stackoverflow.com/questions/42276881/increment-firebase-value-from-javascript-subject-to-constraint
-
-* Story Points for stories - DONE
-
-* If user id does not exist - block add buttons and icons with v-if
-* Validate Reset with https://github.com/baianat/vee-validate/issues/209 - DONE
-* Cursor Styling for icon links in cards
-*/
-
-// Firebase References
 let storiesRef = db.ref('stories')
 let storiesUserOwnedRef = db.ref('storiesUserOwned/')
 
@@ -189,6 +164,7 @@ export default {
           who: '',
           what: '',
           why: '',
+          backlogId: '',
           showFormInput: true,
           acceptance_criteria: '',
           stories: [
@@ -392,6 +368,10 @@ export default {
               console.log("ERROR USER NOT SIGNED IN")
           }
       });
+  },
+  mounted: function() {
+      console.log("BACKLOG ID", this.$route.params.backlogId)
+      this.backlogId = this.$route.params.backlogId
   }
 }
 </script>
