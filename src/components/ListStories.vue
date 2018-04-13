@@ -188,8 +188,8 @@ export default {
   },
   methods: {
     voteStory: function(storyId, isUpVote) {
-
-        let storyToUpvoteRef = storiesUserOwnedRef.child(this.user.uid).child(storyId).child("votes")
+                   
+        let storyToUpvoteRef = storiesUserOwnedRef.child(this.user.uid).child(this.backlogId).child(storyId).child("votes")
 
         if (isUpVote) {
             // Add one vote
@@ -290,14 +290,9 @@ export default {
               }
           });
     },
-    deleteStory: function(i) {
-        /* obsolete function, can be removed */
-        console.log("DELETE CLICKED")
-        this.stories.splice(i, 1);
-    },
     removeStory: function(story) {
         storiesRef.child(story['.key']).remove()
-        storiesUserOwnedRef.child(this.user.uid).child(story['.key']).remove()
+        storiesUserOwnedRef.child(this.user.uid).child(this.backlogId).child(story['.key']).remove()
     },
     toggleAcceptanceCriteria: function(story) {
         console.log("AC CLICKED")
